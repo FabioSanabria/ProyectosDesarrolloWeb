@@ -1,24 +1,30 @@
-const Sequelize = require('sequelize');
-const db = require('../config/db');
-const Publicacion = require('./publicacion'); // Asegúrate de importar el modelo Publicacion
+const { Model } = require('sequelize');
 
-const Comentario = db.define('comentarios', {
+module.exports = (sequelize, DataTypes) => {
+  class Comentario extends Model {
+    static associate(models) {
+      Comentario.belongsTo(models.Publicacion, {
+        foreignKey: 'publicacionId' // Clave foránea para establecer la relación con la tabla Publicacion
+      });
+    }
+  }
+
+  Comentario.init({
     ID: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
     },
     Correo: {
-        type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     Texto: {
-        type: Sequelize.TEXT
+      type: DataTypes.TEXT
     }
-});
+  }, {
+    sequelize,
+    modelName: 'Comentario',
+  });
 
-// Definir la relación entre Comentario y Publicacion
-Comentario.belongsTo(Publicacion, {
-    foreignKey: 'publicacionId' // Clave foránea para establecer la relación con la tabla Publicacion
-});
-
-module.exports = Comentario;
+  return Comentario;
+};

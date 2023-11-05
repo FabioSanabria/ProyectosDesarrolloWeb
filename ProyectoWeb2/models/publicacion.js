@@ -1,38 +1,44 @@
-const Sequelize = require('sequelize');
-const db = require('../config/db');
-const Autor = require('./autor'); // Importar el modelo Autor
-const Comentario = require('./comentario'); // Importar el modelo Comentario
+const { Model } = require('sequelize');
 
-const Publicacion = db.define('publicaciones', {
+module.exports = (sequelize, DataTypes) => {
+  class Publicacion extends Model {
+    static associate(models) {
+      Publicacion.belongsTo(models.Autor, {
+        foreignKey: 'autorId' // Indicar la relación con la tabla Autor
+      });
+
+      Publicacion.hasMany(models.Comentario, { foreignKey: 'publicacionId' }); // Relación con Comentario
+    }
+  }
+
+  Publicacion.init({
     ID: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
     },
     Fecha: {
-        type: Sequelize.DATE
+      type: DataTypes.DATE
     },
     Titulo: {
-        type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     Categoria: {
-        type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     Imagen: {
-        type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     Texto: {
-        type: Sequelize.TEXT
+      type: DataTypes.TEXT
     },
     autorId: {
-        type: Sequelize.INTEGER // Clave foránea para establecer la relación
+      type: DataTypes.INTEGER // Clave foránea para establecer la relación
     }
-});
+  }, {
+    sequelize,
+    modelName: 'Publicacion',
+  });
 
-Publicacion.belongsTo(Autor, {
-    foreignKey: 'autorId' // Indicar la relación con la tabla Autor
-});
-
-Publicacion.hasMany(Comentario, { foreignKey: 'publicacionId' }); // Relación con Comentario
-
-module.exports = Publicacion; // Exportar el modelo Publicacion
+  return Publicacion;
+};

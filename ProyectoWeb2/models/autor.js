@@ -1,30 +1,37 @@
-const Sequelize = require('sequelize');
-const db = require('../config/db');
-const Publicacion = require('./publicacion'); // Importa el modelo de Publicacion si no se ha importado
+const { Model } = require('sequelize');
 
-const Autor = db.define('autor', {
+module.exports = (sequelize, DataTypes) => {
+  class Autor extends Model {
+    static associate(models) {
+      // Define association here
+      Autor.hasMany(models.Publicacion, {
+        foreignKey: 'autorId' // Define la clave foránea en la tabla Publicacion que hace referencia al ID del Autor
+      });
+    }
+  }
+
+  Autor.init({
     ID: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
     },
     NombreP: {
-        type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     Apellido: {
-        type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     Contraseña: {
-        type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     Tipo: {
-        type: Sequelize.STRING
+      type: DataTypes.STRING
     }
-});
+  }, {
+    sequelize,
+    modelName: 'Autor',
+  });
 
-// Definir la asociación entre Autor y Publicacion si es una relación uno-a-muchos (un autor tiene muchas publicaciones)
-Autor.hasMany(Publicacion, {
-    foreignKey: 'autorId' // Definir la clave foránea en la tabla Publicacion que hace referencia al ID del Autor
-});
-
-module.exports = Autor;
+  return Autor;
+};
