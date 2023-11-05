@@ -1,8 +1,8 @@
-// Modelo de Comentario
-import Sequelize from 'sequelize';
-import db from '../config/db.js';
+const Sequelize = require('sequelize');
+const db = require('../config/db');
+const Publicacion = require('./publicacion'); // Asegúrate de importar el modelo Publicacion
 
-export const Comentario = db.define('comentarios', {
+const Comentario = db.define('comentarios', {
     ID: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -13,12 +13,12 @@ export const Comentario = db.define('comentarios', {
     },
     Texto: {
         type: Sequelize.TEXT
-    },
-    publicacionId: {
-        type: Sequelize.INTEGER // Clave foránea para establecer la relación
     }
 });
 
+// Definir la relación entre Comentario y Publicacion
 Comentario.belongsTo(Publicacion, {
-    foreignKey: 'publicacionId' // Indicar la relación con la tabla Publicacion
+    foreignKey: 'publicacionId' // Clave foránea para establecer la relación con la tabla Publicacion
 });
+
+module.exports = Comentario;

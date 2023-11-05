@@ -1,7 +1,9 @@
-import Sequelize from 'sequelize';
-import db from '../config/db.js';
+const Sequelize = require('sequelize');
+const db = require('../config/db');
+const Autor = require('./autor'); // Importar el modelo Autor
+const Comentario = require('./comentario'); // Importar el modelo Comentario
 
-export const Publicacion = db.define('publicaciones', {
+const Publicacion = db.define('publicaciones', {
     ID: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -32,3 +34,5 @@ Publicacion.belongsTo(Autor, {
 });
 
 Publicacion.hasMany(Comentario, { foreignKey: 'publicacionId' }); // Relación con Comentario
+
+module.exports = Publicacion; // Exportar el modelo Publicacion
