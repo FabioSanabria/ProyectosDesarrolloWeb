@@ -2,7 +2,7 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Comentario', {
+    await queryInterface.createTable('Comentarios', {
       ID: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -17,7 +17,7 @@ module.exports = {
       publicacionId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Publicacion', // Nombre de la tabla referenciada
+          model: 'Publicacions', // Nombre de la tabla referenciada
           key: 'ID' // Clave primaria de la tabla referenciada
         },
         onUpdate: 'CASCADE',
@@ -35,6 +35,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('comentarios');
+    await queryInterface.dropTable('Comentarios');
   }
 };
