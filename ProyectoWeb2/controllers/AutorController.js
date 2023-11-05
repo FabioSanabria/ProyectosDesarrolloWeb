@@ -10,12 +10,12 @@ const obtenerTodosLosAutores = async (req, res) => {
     }).catch(err => console.log(err));
     // TODO: Cambiar el nombre de la vista a autores porque no se como se llama el lugar donde va a tener los
     // autores(Juan)
-    await res.render('autores', {autores});
+    await res.render('../views/autor', {autores});
 }
 
 const obtenerAutorPorId = async (req, res) => {
     const autorObtenible = await autor.findByPk(req.params.id).catch(err => console.log(err));
-    await res.render('autor', {autorObtenible});
+    await res.render('../views/autor', {autorObtenible});
 }
 
 const crearAutor = async (req, res) => {
@@ -25,7 +25,7 @@ const crearAutor = async (req, res) => {
         contraseña: req.body.contraseña,
         
     }).catch(err => console.log(err));
-    await res.redirect('/autores');
+    await res.redirect('../views/autor');
 }
 
 const actualizarAutor = async (req, res) => {
@@ -36,14 +36,14 @@ const actualizarAutor = async (req, res) => {
     }, {
         where: { id: req.params.id }
     }).catch(err => console.log(err));
-    await res.redirect('/autores');
+    await res.redirect('../views/autor');
 }
 
 const eliminarAutor = async (req, res) => {
     await autor.destroy({
         where: { id: req.params.id }
     }).catch(err => console.log(err));
-    await res.redirect('/autores');
+    await res.redirect('../views/autor');
 }
 
 module.exports = {

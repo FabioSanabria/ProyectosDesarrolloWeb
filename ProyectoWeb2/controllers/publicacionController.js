@@ -5,7 +5,7 @@ const obtenerTodasLasPublicaciones = async (req, res) => {
     const publicaciones = await publicacion.findAll({
         raw : true
     }).catch(err => console.log(err));
-    await res.render('../views/publicaciones.ejs', {publicaciones});
+    await res.render('../views/publicaciones', {publicaciones});
 }
 
 const crearPublicacion = async (req, res) => {
@@ -17,7 +17,7 @@ const crearPublicacion = async (req, res) => {
         Texto: req.body.Texto,
         autorId: req.body.autorId
     }).catch(err => console.log(err));
-    await res.redirect('/publicaciones');
+    await res.redirect('../views/publicaciones');
 }
 
 const obtenerPublicacionesDeUnAutor = async (req, res) => {
@@ -27,7 +27,7 @@ const obtenerPublicacionesDeUnAutor = async (req, res) => {
             autorId: req.params.autorId
         }
     }).catch(err => console.log(err));
-    await res.render('/publicaciones', {publicaciones});
+    await res.render('../views/publicaciones', {publicaciones});
 }
 
 const obtenerPublicacionesMasRecientes = async (req, res) => {
@@ -37,7 +37,7 @@ const obtenerPublicacionesMasRecientes = async (req, res) => {
             ['Fecha', 'DESC']
         ]
     }).catch(err => console.log(err));
-    await res.render('/publicaciones', {publicaciones});
+    await res.render('../views/publicaciones', {publicaciones});
 }
 
 const eliminarPublicacionesDeUnAutor = async (req, res) => {
@@ -46,7 +46,7 @@ const eliminarPublicacionesDeUnAutor = async (req, res) => {
             autorId: req.params.autorId
         }
     }).catch(err => console.log(err));
-    await res.redirect('/publicaciones');
+    await res.redirect('../views/publicaciones');
 }
 
 module.exports = {
