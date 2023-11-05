@@ -1,58 +1,65 @@
-const publicacion = require('../models/publicacion');
-const { raw } = require('mysql2');
+const Publicacion = require('../models').Publicacion;
 
-const obtenerTodasLasPublicaciones = async (req, res) => {
-    const publicaciones = await publicacion.findAll({
-        raw : true
-    }).catch(err => console.log(err));
-    await res.render('../views/publicaciones', {publicaciones});
-}
-
-const crearPublicacion = async (req, res) => {
-    await publicacion.create({
-        Fecha: req.body.Fecha,
-        Titulo: req.body.Titulo,
-        Categoria: req.body.Categoria,
-        Imagen: req.body.Imagen,
-        Texto: req.body.Texto,
-        autorId: req.body.autorId
-    }).catch(err => console.log(err));
-    await res.redirect('../views/publicaciones');
-}
-
-const obtenerPublicacionesDeUnAutor = async (req, res) => {
-    const publicaciones = await publicacion.findAll({
-        raw: true,
-        where: {
-            autorId: req.params.autorId
+class PublicacionController {
+    async obtenerTodasLasPublicaciones(req, res) {
+        try {
+            const publicaciones = await Publicacion.findAll();
+            res.render('../views/publicaciones.ejs', { publicaciones });
+        } catch (err) {
+            console.log(err);
         }
-    }).catch(err => console.log(err));
-    await res.render('../views/publicaciones', {publicaciones});
-}
+    }
 
-const obtenerPublicacionesMasRecientes = async (req, res) => {
-    const publicaciones = await publicacion.findAll({
-        raw: true,
-        order: [
-            ['Fecha', 'DESC']
-        ]
-    }).catch(err => console.log(err));
-    await res.render('../views/publicaciones', {publicaciones});
-}
-
-const eliminarPublicacionesDeUnAutor = async (req, res) => {
-    await publicacion.destroy({
-        where: {
-            autorId: req.params.autorId
+    async crearPublicacion(req, res) {
+        try {
+            await Publicacion.create({
+                Fecha: req.body.Fecha,
+                Titulo: req.body.Titulo,
+                Categoria: req.body.Categoria,
+                Imagen: req.body.Imagen,
+                Texto: req.body.Texto,
+                autorId: req.body.autorId
+            });
+            res.redirect('/publicaciones');
+        } catch (err) {
+            console.log(err);
         }
-    }).catch(err => console.log(err));
-    await res.redirect('../views/publicaciones');
+    }
+
+    async obtenerPublicacionesDeUnAutor(req, res) {
+        try {
+            const publicaciones = await Publicacion.findAll({
+                raw: true,
+                where: { autorId: req.params.autorId }
+            });
+            res.render('/publicaciones', { publicaciones });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async obtenerPublicacionesMasRecientes(req, res) {
+        try {
+            const publicaciones = await Publicacion.findAll({
+                raw: true,
+                order: [['Fecha', 'DESC']]
+            });
+            res.render('/publicaciones', { publicaciones });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async eliminarPublicacionesDeUnAutor(req, res) {
+        try {
+            await Publicacion.destroy({
+                where: { autorId: req.params.autorId }
+            });
+            res.redirect('/publicaciones');
+        } catch (err) {
+            console.log(err);
+        }
+    }
 }
 
-module.exports = {
-    obtenerTodasLasPublicaciones,
-    crearPublicacion,
-    obtenerPublicacionesDeUnAutor,
-    obtenerPublicacionesMasRecientes,
-    eliminarPublicacionesDeUnAutor
-};
+module.exports = PublicacionController;
