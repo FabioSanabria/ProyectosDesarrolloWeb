@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Publicaciones</title>
+</head>
+<body>
+    <h1>Lista de Publicaciones</h1>
+    <ul>
+        <% publicaciones.forEach(publicacion => { %>
+            <li>
+                <h2><%= publicacion.Titulo %></h2>
+                <p>Autor: <%= publicacion.autorId %></p>
+                <p>Categoría: <%= publicacion.Categoria %></p>
+                <p>Fecha: <%= publicacion.Fecha %></p>
+                <img src="<%= publicacion.Imagen %>" alt="<%= publicacion.Titulo %>" />
+                <p><%= publicacion.Texto %></p>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>
