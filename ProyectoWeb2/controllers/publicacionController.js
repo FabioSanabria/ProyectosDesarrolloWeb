@@ -4,7 +4,7 @@ class PublicacionController {
     async obtenerTodasLasPublicaciones(req, res) {
         try {
             const publicaciones = await Publicacion.findAll();
-            res.render('../views/publicaciones.ejs', { publicaciones });
+            res.render('../views/publicaciones', { publicaciones });
         } catch (err) {
             console.log(err);
         }
@@ -20,7 +20,7 @@ class PublicacionController {
                 Texto: req.body.Texto,
                 autorId: req.body.autorId
             });
-            res.redirect('/publicaciones');
+            res.redirect('../views/publicaciones');
         } catch (err) {
             console.log(err);
         }
@@ -32,7 +32,7 @@ class PublicacionController {
                 raw: true,
                 where: { autorId: req.params.autorId }
             });
-            res.render('/publicaciones', { publicaciones });
+            res.render('../views/publicaciones', { publicaciones });
         } catch (err) {
             console.log(err);
         }
@@ -44,7 +44,7 @@ class PublicacionController {
                 raw: true,
                 order: [['Fecha', 'DESC']]
             });
-            res.render('/publicaciones', { publicaciones });
+            res.render('../views/publicaciones', { publicaciones });
         } catch (err) {
             console.log(err);
         }
@@ -55,7 +55,7 @@ class PublicacionController {
             await Publicacion.destroy({
                 where: { autorId: req.params.autorId }
             });
-            res.redirect('/publicaciones');
+            res.redirect('../views/publicaciones');
         } catch (err) {
             console.log(err);
         }

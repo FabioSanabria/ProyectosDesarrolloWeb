@@ -1,28 +1,32 @@
 const express = require('express');
 const router = express.Router();
-const {
-        obtenerTodasLasPublicaciones,
-        crearPublicacion,
-        obtenerPublicacionesDeUnAutor,
-        obtenerPublicacionesMasRecientes,
-        eliminarPublicacionesDeUnAutor
-    } = require('../controllers/publicacionController');
+const PublicacionController = require('../controllers/PublicacionController'); // Import the controller
 
-// TODO: Para Juan, ver si te sirve para el frontend en EJS, si hay algun problema puedes cambiarlas como gustes
+const publicacionController = new PublicacionController(); // Create an instance of the controller
 
-// Obtener todas las publicaciones
-router.get('/', obtenerTodasLasPublicaciones);
+// Route to obtain all publications
+router.get('/', async (req, res) => {
+    await publicacionController.obtenerTodasLasPublicaciones(req, res);
+});
 
-// Crear una publicacion
-router.post('/create', crearPublicacion);
+// Route to create a new publication
+router.post('/', async (req, res) => {
+    await publicacionController.crearPublicacion(req, res);
+});
 
-// Obtener publicaciones de un autor
-router.get('/autor/:autorId', obtenerPublicacionesDeUnAutor);
+// Route to obtain publications of a specific author
+router.get('/autor/:autorId', async (req, res) => {
+    await publicacionController.obtenerPublicacionesDeUnAutor(req, res);
+});
 
-// Obtener publicaciones mas recientes
-router.get('/recientes', obtenerPublicacionesMasRecientes);
+// Route to obtain the most recent publications
+router.get('/recientes', async (req, res) => {
+    await publicacionController.obtenerPublicacionesMasRecientes(req, res);
+});
 
-// Eliminar publicaciones de un autor
-router.delete('/delete/:autorId', eliminarPublicacionesDeUnAutor);
+// Route to delete publications of a specific author
+router.delete('/autor/:autorId', async (req, res) => {
+    await publicacionController.eliminarPublicacionesDeUnAutor(req, res);
+});
 
 module.exports = router;
