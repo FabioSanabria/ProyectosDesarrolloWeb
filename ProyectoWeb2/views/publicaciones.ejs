@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lista de Publicaciones</title>
+    <title>Publicaciones</title>
 </head>
 <body>
-    <h1>Lista de Publicaciones</h1>
+    <h1>List of Publications</h1>
+    <ul>
+        <% publicaciones.forEach(publicacion => { %>
+            <li>
+                <h2><%= publicacion.Titulo %></h2>
+                <p>Fecha: <%= publicacion.Fecha %></p>
+                <p>Categoria: <%= publicacion.Categoria %></p>
+                <p>Autor ID: <%= publicacion.autorId %></p>
+                <p>Texto: <%= publicacion.Texto %></p>
+            </li>
+        <% }); %>
+    </ul>
 </body>
 </html>
