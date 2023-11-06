@@ -1,6 +1,7 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
+
   class Publicacion extends Model {
     static associate(models) {
       Publicacion.belongsTo(models.Autor, {
@@ -37,7 +38,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Publicacion',
+      modelName: 'Publicacion',
+      freezeTableName: true
   });
 
   return Publicacion;
