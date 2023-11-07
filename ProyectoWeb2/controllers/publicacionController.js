@@ -63,6 +63,27 @@ class PublicacionController {
         }
     }
 
+    async mostrarPublicacionIndividual(req, res) {
+        try {
+            // Obtener la publicación por su ID
+            const publicacion = await Publicacion.findOne({
+                where: { ID: req.params.id }
+            });
+
+            if (!publicacion) {
+                // Manejar caso en el que la publicación no se encuentra
+                return res.status(404).send('Publicación no encontrada');
+            }
+
+            // Renderiza una vista EJS para mostrar la publicación individual
+            res.render('../views/publicacion_completa', { publicacion });
+        } catch (err) {
+            console.log(err);
+            res.status(500).send('Error al obtener la publicación');
+        }
+    }
+
+
     async obtenerPublicacionesPaginadas(req, res) {
         // Página actual (Por defecto 1)
         const page = req.query.page || 1;
@@ -94,5 +115,7 @@ class PublicacionController {
         }
     }
 }
+
+
 
 module.exports = PublicacionController;

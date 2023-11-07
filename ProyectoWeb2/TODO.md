@@ -1,0 +1,2 @@
+1) En la página de Feed y Publicación deben salir los nombres de los autores en vez de su ID para cada publicación.
+2) Mostrar imágenes en vez del nombre de la imagen (Si posible, también pueden ser links para no tenerlas local)
