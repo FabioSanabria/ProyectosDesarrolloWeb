@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var pubFeedRouter = require('./routes/pubFeedRouter');
 var pubAutorRouter = require('./routes/pubAutorRouter');
+var pubCategoriaRouter = require('./routes/pubCategoriaRouter');
 var pubCompletaRouter = require('./routes/pubCompletaRouter');
 
 
@@ -27,6 +28,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/publicaciones', pubFeedRouter);
 app.use('/autor', pubAutorRouter);
+app.use('/categoria', pubCategoriaRouter);
 app.use('/publicacion_completa', pubCompletaRouter);
 
 // catch 404 and forward to error handler

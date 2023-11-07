@@ -1,0 +1,60 @@
+<DOCTYPE html>
+<html class="no-js" lang="es">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diario Web</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.3/motion-ui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-prototype.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <!-- Start Top Bar -->
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="menu">
+          <li class="menu-text">Organización o persona</li>
+          <li><a href="/publicaciones">Volver</a></li>
+        </ul>
+      </div>
+      <div class="top-bar-right">
+        <ul class="menu">
+          <li><a href="#">Acceso</a></li>
+          <li><a href="#">Administración</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End Top Bar -->
+    <div class="callout large primary">
+      <div class="text-center">
+        <h1>Diario web</h1>
+      </div>
+    </div>
+    <section class="grid-container">
+      <div id="content">
+        <div class="callout large primary">
+            <div class="medium-9 cell">
+                <h1>Lista de Publicaciones</h1>
+                <ul id="publicaciones-container">
+                    <!-- Publicaciones se cargan -->
+                <% publicaciones.forEach(publicacion => { %>
+                    <article class="blog-post">
+						<h3> <a href="/publicacion_completa/<%= publicacion.ID %> "><%= publicacion.Titulo %></a> </h3>
+					</article>
+                <% }); %>
+                </ul>
+            </div>
+            <div>
+                <ul class="pagination" role="navigation" aria-label="Pagination" id="pagination-container">
+                </ul>
+            </div>
+        </div>
+      </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.3/motion-ui.min.js"></script>
+  </body>
+</html>

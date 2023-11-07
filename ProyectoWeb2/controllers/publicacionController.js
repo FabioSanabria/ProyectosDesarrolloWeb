@@ -41,6 +41,19 @@ class PublicacionController {
         }
     }
 
+    async obtenerPublicacionesDeUnaCategoria(req, res) {
+        try {
+            const publicaciones = await Publicacion.findAll({
+                raw: true,
+                where: { Categoria: req.params.Categoria },
+                order: [['Fecha', 'DESC']]
+            });
+            res.render('../views/Categoria', { publicaciones });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     async obtenerPublicacionesMasRecientes(req, res) {
         try {
             const publicaciones = await Publicacion.findAll({
