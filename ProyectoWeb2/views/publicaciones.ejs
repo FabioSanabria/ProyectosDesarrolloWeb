@@ -5,7 +5,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <h1>List of Publications</h1>
+    <h1>Lista de Publicaciones</h1>
     <ul id="publicaciones-container">
         <!-- Publicaciones se cargar -->
     </ul>
@@ -27,17 +27,17 @@
 
                     // Agrega las publicaciones al contenedor
                     publicaciones.forEach(function (publicacion) {
+                        const textoRecortado = publicacion.Texto.length > 300 ? publicacion.Texto.substring(0, 300) + "..." : publicacion.Texto;
                         $('#publicaciones-container').append(
                             `<li>
                                 <h2>${publicacion.Titulo}</h2>
                                 <p>Fecha: ${publicacion.Fecha}</p>
                                 <p>Categoria: ${publicacion.Categoria}</p>
                                 <p>Autor ID: ${publicacion.autorId}</p>
-                                <p>Texto: ${publicacion.Texto}</p>
+                                <p>Texto: ${textoRecortado}</p>
                             </li>`
                         );
                     });
-
                     // Limpia el contenedor de paginación
                     $('#pagination-container').empty();
 
