@@ -81,7 +81,8 @@
                         const textoRecortado = publicacion.Texto.length > 300 ? publicacion.Texto.substring(0, 300) + "..." : publicacion.Texto;
                         $('#publicaciones-container').append(
                             `<li>
-                                <h2>${publicacion.Titulo}</h2>
+                                <h2><a href="/publicacion/${publicacion.id} ">${publicacion.Titulo}</a></h2>
+                                <p>${publicacion.Imagen}</p>
                                 <p>Fecha: ${publicacion.Fecha}</p>
                                 <p>Categoria: ${publicacion.Categoria}</p>
                                 <p>Autor ID: ${publicacion.autorId}</p>

@@ -5,9 +5,7 @@ const AutorController = require('../controllers/AutorController'); // Importar e
 const autorController = new AutorController(); // Crear una instancia del controlador
 
 // Route to obtain all authors
-router.get('/', async (req, res) => {
-    await autorController.obtenerTodosLosAutores(req, res);
-});
+router.get('/', autorController.obtenerTodosLosAutores);
 
 // Route to create a new author
 router.post('/', async (req, res) => {
