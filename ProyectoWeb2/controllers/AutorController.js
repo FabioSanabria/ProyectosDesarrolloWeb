@@ -1,11 +1,10 @@
 const autor = require('../models').Autor;
-// Suponiendo que 'Autor' es tu modelo de Sequelize para autores
 
 class AutorController {
     async obtenerTodosLosAutores(req, res) {
         try {
             const autores = await autor.findAll();
-            res.render('../views/autor', { autores });
+            res.render('../views/publicaciones', { autores });
         } catch (err) {
             console.log(err);
         }

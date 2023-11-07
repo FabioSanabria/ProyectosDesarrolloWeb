@@ -46,8 +46,11 @@
               <li><a href="#">Cat1</a></li>
             </ul>
             <h4>Autores</h4>
-            <ul>
-              <li><a href="#">Aut1</a></li>
+            <ul id="autor-container">
+                <% publicaciones.forEach(autor => { %>
+                <!-- Publicaciones se cargar -->
+                    <li><a href="/autores/<%= autor.id %>"><%= autor.nombre %></a></li>
+                <% }); %>
             </ul>
           </div>
         </aside>
