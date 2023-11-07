@@ -60,6 +60,37 @@ class PublicacionController {
             console.log(err);
         }
     }
+
+    async obtenerPublicacionesPaginadas(req, res) {
+        // Página actual (Por defecto 1)
+        const page = req.query.page || 1;
+         // Publicaciones por página (Por Defecto 5)
+        const perPage = parseInt(req.query.perPage) || 5;
+
+        try {
+            const offset = (page - 1) * perPage;
+
+            // Obtener las publicaciones paginadas
+            const publicaciones = await Publicacion.findAll({
+                raw: true,
+                order: [['Fecha', 'DESC']],
+                limit: perPage,
+                offset: offset,
+            });
+
+            // Calcular el número total de páginas
+            const totalPublicaciones = await Publicacion.count();
+            const totalPages = Math.ceil(totalPublicaciones / perPage);
+
+            res.json({
+                publications: publicaciones,
+                totalPages: totalPages,
+            });
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Error al obtener las publicaciones paginadas' });
+        }
+    }
 }
 
 module.exports = PublicacionController;

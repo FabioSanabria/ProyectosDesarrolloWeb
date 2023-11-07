@@ -4,19 +4,22 @@ const PublicacionController = require('../controllers/publicacionController');
 
 const publicacionController = new PublicacionController();
 
-// Route for obtaining all publicaciones
+// Ruta para obtener todas las publicaciones.
 router.get('/', publicacionController.obtenerTodasLasPublicaciones);
 
-// Route for creating a new publicacion
+// Ruta para obtener las publicaciones páginadas.
+router.get('/paginadas', publicacionController.obtenerPublicacionesPaginadas);
+
+// Ruta para crear nueva publicacion.
 router.post('/', publicacionController.crearPublicacion);
 
-// Route for obtaining publicaciones of a specific author
+// Ruta para obtener las publicaciones de un autor.
 router.get('/autor/:autorId', publicacionController.obtenerPublicacionesDeUnAutor);
 
-// Route for obtaining most recent publicaciones
+// Ruta para obtener las publicaciones recientes.
 router.get('/recientes', publicacionController.obtenerPublicacionesMasRecientes);
 
-// Route for deleting publicaciones of a specific author
+// Ruta para elimnar las publicaciones de un autor.
 router.delete('/autor/:autorId', publicacionController.eliminarPublicacionesDeUnAutor);
 
 module.exports = router;
