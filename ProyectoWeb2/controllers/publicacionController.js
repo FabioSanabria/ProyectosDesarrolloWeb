@@ -32,9 +32,9 @@ class PublicacionController {
         try {
             const publicaciones = await Publicacion.findAll({
                 raw: true,
-                where: { autorId: req.params.autorId }
+                where: { autorId: req.params.id }
             });
-            res.render('../views/publicaciones', { publicaciones });
+            res.render('../views/autor', { publicaciones });
         } catch (err) {
             console.log(err);
         }
