@@ -2,19 +2,66 @@
 <html>
 <head>
     <title>Publicaciones</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <h1>List of Publications</h1>
-    <ul>
-        <% publicaciones.forEach(publicacion => { %>
-            <li>
-                <h2><%= publicacion.Titulo %></h2>
-                <p>Fecha: <%= publicacion.Fecha %></p>
-                <p>Categoria: <%= publicacion.Categoria %></p>
-                <p>Autor ID: <%= publicacion.autorId %></p>
-                <p>Texto: <%= publicacion.Texto %></p>
-            </li>
-        <% }); %>
+    <ul id="publicaciones-container">
+        <!-- Publicaciones se cargar -->
     </ul>
+    <div id="pagination-container">
+        <!-- Barra de paginación -->
+    </div>
+    <script>
+        // Función para cargar más publicaciones mediante AJAX
+        function cargarMasPublicaciones(page) {
+            $.ajax({
+                url: '/publicaciones/paginadas?page=' + page,
+                type: 'GET',
+                success: function (data) {
+                    const publicaciones = data.publications;
+                    const totalPages = data.totalPages;
+
+                    // Limpia el contenedor de publicaciones
+                    $('#publicaciones-container').empty();
+
+                    // Agrega las publicaciones al contenedor
+                    publicaciones.forEach(function (publicacion) {
+                        $('#publicaciones-container').append(
+                            `<li>
+                                <h2>${publicacion.Titulo}</h2>
+                                <p>Fecha: ${publicacion.Fecha}</p>
+                                <p>Categoria: ${publicacion.Categoria}</p>
+                                <p>Autor ID: ${publicacion.autorId}</p>
+                                <p>Texto: ${publicacion.Texto}</p>
+                            </li>`
+                        );
+                    });
+
+                    // Limpia el contenedor de paginación
+                    $('#pagination-container').empty();
+
+                    // Agrega la barra de paginación
+                    for (let i = 1; i <= totalPages; i++) {
+                        $('#pagination-container').append(
+                            `<button class="page-link" data-page="${i}">${i}</button>`
+                        );
+                    }
+
+                    // Agrega el manejador de eventos a los botones de la paginación
+                    $('.page-link').on('click', function () {
+                        const page = $(this).data('page');
+                        cargarMasPublicaciones(page);
+                    });
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        // Carga las primeras 5 publicaciones al cargar la página
+        cargarMasPublicaciones(1);
+    </script>
 </body>
 </html>
