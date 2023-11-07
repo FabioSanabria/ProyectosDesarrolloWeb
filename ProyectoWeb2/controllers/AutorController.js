@@ -1,55 +1,63 @@
-// Suponiendo que estás utilizando Express.js
-const { raw } = require('mysql2');
-const { autor } = require('../models/autor'); // Importa el modelo de Autor
-
+const autor = require('../models').Autor;
 // Suponiendo que 'Autor' es tu modelo de Sequelize para autores
 
-const obtenerTodosLosAutores = async (req, res) => {
-    const autores = await autor.findAll(    {
-        raw : true
-    }).catch(err => console.log(err));
-    // TODO: Cambiar el nombre de la vista a autores porque no se como se llama el lugar donde va a tener los
-    // autores(Juan)
-    await res.render('../views/autor', {autores});
+class AutorController {
+    async obtenerTodosLosAutores(req, res) {
+        try {
+            const autores = await autor.findAll();
+            res.render('../views/autor', { autores });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async obtenerAutorPorId(req, res) {
+        try {
+            const autorObtenible = await autor.findByPk(req.params.id);
+            res.render('../views/autor', { autorObtenible });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async crearAutor(req, res) {
+        try {
+            await autor.create({
+                nombre: req.body.nombre,
+                apellido: req.body.apellido,
+                contraseña: req.body.contraseña,
+            });
+            res.redirect('../views/autor');
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async actualizarAutor(req, res) {
+        try {
+            await autor.update({
+                nombre: req.body.nombre,
+                apellido: req.body.apellido,
+                contraseña: req.body.contraseña,
+            }, {
+                where: { id: req.params.id }
+            });
+            res.redirect('../views/autor');
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async eliminarAutor(req, res) {
+        try {
+            await autor.destroy({
+                where: { id: req.params.id }
+            });
+            res.redirect('../views/autor');
+        } catch (err) {
+            console.log(err);
+        }
+    }
 }
 
-const obtenerAutorPorId = async (req, res) => {
-    const autorObtenible = await autor.findByPk(req.params.id).catch(err => console.log(err));
-    await res.render('../views/autor', {autorObtenible});
-}
-
-const crearAutor = async (req, res) => {
-    await autor.create({
-        nombre: req.body.nombre,
-        apellido: req.body.apellido,
-        contraseña: req.body.contraseña,
-        
-    }).catch(err => console.log(err));
-    await res.redirect('../views/autor');
-}
-
-const actualizarAutor = async (req, res) => {
-    await autor.update({
-        nombre: req.body.nombre,
-        apellido: req.body.apellido,
-        contraseña: req.body.contraseña,
-    }, {
-        where: { id: req.params.id }
-    }).catch(err => console.log(err));
-    await res.redirect('../views/autor');
-}
-
-const eliminarAutor = async (req, res) => {
-    await autor.destroy({
-        where: { id: req.params.id }
-    }).catch(err => console.log(err));
-    await res.redirect('../views/autor');
-}
-
-module.exports = {
-    obtenerTodosLosAutores,
-    obtenerAutorPorId,
-    crearAutor,
-    actualizarAutor,
-    eliminarAutor
-};
+module.exports = AutorController;

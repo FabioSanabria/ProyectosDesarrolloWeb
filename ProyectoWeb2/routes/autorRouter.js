@@ -1,28 +1,32 @@
 const express = require('express');
 const router = express.Router();
-const {     
-        obtenerTodosLosAutores,
-        obtenerAutorPorId,
-        crearAutor,
-        actualizarAutor,
-        eliminarAutor
-    } = require('../controllers/autorController');
+const AutorController = require('../controllers/AutorController'); // Importar el controlador
 
-// TODO: Para Juan, ver si te sirve para el frontend en EJS, si hay algun problema puedes cambiarlas como gustes
+const autorController = new AutorController(); // Crear una instancia del controlador
 
-// Obtener todos los autores
-router.get('/', obtenerTodosLosAutores);
+// Route to obtain all authors
+router.get('/', async (req, res) => {
+    await autorController.obtenerTodosLosAutores(req, res);
+});
 
-// Obtener un autor por id
-router.get('/autor/:id', obtenerAutorPorId);
+// Route to create a new author
+router.post('/', async (req, res) => {
+    await autorController.crearAutor(req, res);
+});
 
-// Crear un autor
-router.post('/create', crearAutor);
+// Route to obtain an author by id
+router.get('/:id', async (req, res) => {
+    await autorController.obtenerAutorPorId(req, res);
+});
 
-// Actualizar un autor
-router.put('/update/:id', actualizarAutor);
+// Route to update an author
+router.put('/:id', async (req, res) => {
+    await autorController.actualizarAutor(req, res);
+});
 
-// Eliminar un autor
-router.delete('/delete/:id', eliminarAutor);
+// Route to delete an author
+router.delete('/:id', async (req, res) => {
+    await autorController.eliminarAutor(req, res);
+});
 
 module.exports = router;

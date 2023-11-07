@@ -1,22 +1,36 @@
-// TODO: Revisar si los comentarios requieren de una llave foranea a la tabla Autor
-const comentarios = require('../models/comentarios');
-const { raw } = require('mysql2');
+const comentario = require('../models').Comentario;
 
-const obtenerComentariosDeUnaPublicacion = async (req, res) => {
-    const comentariosPublicacion = await comentarios.findAll({
-        raw: true,
-        where: {
-            publicacionId: req.params.publicacionId
+class ComentarioController {
+    async obtenerComentariosDeUnaPublicacion(req, res) {
+        try {
+            const comentariosPublicacion = await comentario.findAll();
+            res.render('../views/comentarios', { comentariosPublicacion });
+        } catch (err) {
+            console.log(err);
         }
-    }).catch(err => console.log(err));
-    await res.render('/comentarios', {comentariosPublicacion});
-}
+    }
 
-const crearComentario = async (req, res) => {
-    await comentarios.create({
-        Texto: req.body.Texto,
-        Correo: req.body.Correo,
-        publicacionId: req.body.publicacionId
-    }).catch(err => console.log(err));
-    await res.redirect('/comentarios');
+    async crearComentario(req, res) {
+        try {
+            await comentario.create({
+                Texto: req.body.Texto,
+                Correo: req.body.Correo,
+                publicacionId: req.body.publicacionId
+            });
+            res.redirect('../views/comentarios');
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async cantidadComentariosDeUnaPublicacion(req, res) {
+        try {
+            const cantidadComentarios = await comentario.count({
+                where: { publicacionId: req.params.publicacionId }
+            });
+            res.render('../views/comentarios', { cantidadComentarios });
+        } catch (err) {
+            console.log(err);
+        }
+    }
 }

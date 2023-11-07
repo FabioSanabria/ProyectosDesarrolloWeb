@@ -1,16 +1,22 @@
 const express = require('express');
 const router = express.Router();
-const {
-    obtenerComentariosDeUnaPublicacion,
-    crearComentario
-    } = require('../controllers/comentarioController');
+const comentarioController = require('../controllers/comentariosController'); // Importar el controlador
 
-// TODO: Para Juan, ver si te sirve para el frontend en EJS, si hay algun problema puedes cambiarlas como gustes
+const comentarioController = new comentarioController(); // Crear una instancia del controlador
 
-// Obtener todos los comentarios de una publicacion
-router.get('/:publicacionId', obtenerComentariosDeUnaPublicacion);
+// Route to obtain all comments
+router.get('/', async (req, res) => {
+    await comentarioController.obtenerComentariosDeUnaPublicacion(req, res);
+});
 
-// Crear un comentario
-router.post('/create', crearComentario);
+// Route to create a new comment
+router.post('/', async (req, res) => {
+    await comentarioController.crearComentario(req, res);
+});
+
+// Route to obtain comments of a specific publication
+router.get('/:publicacionId', async (req, res) => {
+    await comentarioController.cantidadComentariosDeUnaPublicacion(req, res);
+});
 
 module.exports = router;

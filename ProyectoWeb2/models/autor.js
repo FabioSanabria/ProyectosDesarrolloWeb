@@ -30,7 +30,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Autor',
+      modelName: 'Autor',
+      freezeTableName: true
   });
 
   return Autor;

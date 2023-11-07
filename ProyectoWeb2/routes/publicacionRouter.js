@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const PublicacionController = require('../controllers/PublicacionController'); // Import the controller
+const publicacionController = require('../controllers/PublicacionController'); // Import the controller
 
 const publicacionController = new PublicacionController(); // Create an instance of the controller
 

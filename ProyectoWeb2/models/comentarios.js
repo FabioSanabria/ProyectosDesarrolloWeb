@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Comentario',
+      modelName: 'Comentario',
+      freezeTableName: true
   });
 
   return Comentario;
