@@ -4,9 +4,6 @@ const AutorController = require('../controllers/AutorController'); // Importar e
 
 const autorController = new AutorController(); // Crear una instancia del controlador
 
-// Render
-router.get('/', autorController.renderizar);
-
 // Route to create a new author
 router.post('/', async (req, res) => {
     await autorController.crearAutor(req, res);

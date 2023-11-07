@@ -2,14 +2,6 @@ const autor = require('../models').Autor;
 
 class AutorController {
 
-    async renderizar(req, res) {
-        try {
-            res.render('../views/autor');
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
     async obtenerTodosLosAutores(req, res) {
         try {
             const autores = await autor.findAll();
