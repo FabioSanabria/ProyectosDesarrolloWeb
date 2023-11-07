@@ -15,14 +15,14 @@
     <div class="top-bar">
       <div class="top-bar-left">
         <ul class="menu">
-          <li class="menu-text">Organización o persona</li>
+          <li class="menu-text">OrganizaciÃ³n o persona</li>
           <li><a href="/publicaciones">Volver</a></li>
         </ul>
       </div>
       <div class="top-bar-right">
         <ul class="menu">
           <li><a href="#">Acceso</a></li>
-          <li><a href="#">Administración</a></li>
+          <li><a href="#">AdministraciÃ³n</a></li>
         </ul>
       </div>
     </div>
@@ -39,6 +39,11 @@
                 <h1>Lista de Publicaciones</h1>
                 <ul id="publicaciones-container">
                     <!-- Publicaciones se cargan -->
+                <% publicaciones.forEach(publicacion => { %>
+                    <article class="blog-post">
+						<h3> <a href="/publicacion_completa/<%= publicacion.ID %> "><%= publicacion.Titulo %></a> </h3>
+					</article>
+                <% }); %>
                 </ul>
             </div>
             <div>
