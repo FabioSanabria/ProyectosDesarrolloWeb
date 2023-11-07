@@ -1,8 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const PublicacionController = require('../controllers/publicacionController');
+const AutorController = require('../controllers/AutorController');
 
 const publicacionController = new PublicacionController();
+const autorController = new AutorController();
+
+// Ruta para obtener todos los autores.
+router.get('/', autorController.obtenerTodosLosAutores);
 
 // Ruta para obtener todas las publicaciones.
 router.get('/', publicacionController.obtenerTodasLasPublicaciones);

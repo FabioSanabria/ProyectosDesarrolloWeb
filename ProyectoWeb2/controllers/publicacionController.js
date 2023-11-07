@@ -1,6 +1,8 @@
 const Publicacion = require('../models').Publicacion;
 
 class PublicacionController {
+
+
     async obtenerTodasLasPublicaciones(req, res) {
         try {
             const publicaciones = await Publicacion.findAll();

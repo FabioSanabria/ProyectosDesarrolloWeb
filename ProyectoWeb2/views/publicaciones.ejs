@@ -36,7 +36,7 @@
         <div class="medium-9 cell">
             <h1>Lista de Publicaciones</h1>
             <ul id="publicaciones-container">
-                <!-- Publicaciones se cargar -->
+                <!-- Publicaciones se cargan -->
             </ul>
         </div>
         <aside class="medium-3 cell" data-sticky-container="">
@@ -47,9 +47,9 @@
             </ul>
             <h4>Autores</h4>
             <ul id="autor-container">
-                <% publicaciones.forEach(autor => { %>
-                <!-- Publicaciones se cargar -->
-                    <li><a href="/autores/<%= autor.id %>"><%= autor.nombre %></a></li>
+                <% autores.forEach(autor => { %>
+                <!-- Autor se cargan -->
+                    <li><a href="/autores/<%= autor.id %>"><%= autor.Nombre %> <%= autor.Apellido %></a></li>
                 <% }); %>
             </ul>
           </div>
@@ -85,7 +85,7 @@
                                 <p>${publicacion.Imagen}</p>
                                 <p>Fecha: ${publicacion.Fecha}</p>
                                 <p>Categoria: ${publicacion.Categoria}</p>
-                                <p>Autor ID: ${publicacion.autorId}</p>
+                                <p>Autor: <a href="/autores/${publicacion.autorId}">${publicacion.autorId}</a></p>
                                 <p>Texto: ${textoRecortado}</p>
                             </li>`
                         );

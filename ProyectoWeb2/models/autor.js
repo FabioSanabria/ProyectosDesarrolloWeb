@@ -16,13 +16,13 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
-    NombreP: {
+    Nombre: {
       type: DataTypes.STRING
     },
     Apellido: {
       type: DataTypes.STRING
     },
-    Contraseña: {
+    Contrasena: {
       type: DataTypes.STRING
     },
     Tipo: {
