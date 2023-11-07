@@ -49,7 +49,7 @@
             <ul id="autor-container">
                 <% autores.forEach(autor => { %>
                 <!-- Autor se cargan -->
-                    <li><a href="/autores/<%= autor.id %>"><%= autor.Nombre %> <%= autor.Apellido %></a></li>
+                    <li><a href="/autor/<%= autor.ID %>"><%= autor.Nombre %> <%= autor.Apellido %></a></li>
                 <% }); %>
             </ul>
           </div>
@@ -81,11 +81,11 @@
                         const textoRecortado = publicacion.Texto.length > 300 ? publicacion.Texto.substring(0, 300) + "..." : publicacion.Texto;
                         $('#publicaciones-container').append(
                             `<li>
-                                <h2><a href="/publicacion/${publicacion.id} ">${publicacion.Titulo}</a></h2>
+                                <h2><a href="/publicacion/${publicacion.ID} ">${publicacion.Titulo}</a></h2>
                                 <p>${publicacion.Imagen}</p>
                                 <p>Fecha: ${publicacion.Fecha}</p>
                                 <p>Categoria: ${publicacion.Categoria}</p>
-                                <p>Autor: <a href="/autores/${publicacion.autorId}">${publicacion.autorId}</a></p>
+                                <p>Autor: <a href="/autor/${publicacion.autorId}">${publicacion.autorId}</a></p>
                                 <p>Texto: ${textoRecortado}</p>
                             </li>`
                         );
