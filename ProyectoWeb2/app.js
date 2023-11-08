@@ -1,3 +1,8 @@
+const passport = require('passport');
+// const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
+const expressSession = require('express-session');
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -13,6 +18,50 @@ var pubCompletaRouter = require('./routes/pubCompletaRouter');
 
 
 var app = express();
+const FACEBOOK_CLIENT_ID = '993143955092483';
+const FACEBOOK_CLIENT_SECRET = 'd780e7ef4e58ecaf8e014e7073870fae';
+
+passport.use(new FacebookStrategy({
+    clientID: FACEBOOK_CLIENT_ID,
+    clientSecret: FACEBOOK_CLIENT_SECRET,
+    callbackURL: "/facebook",
+    profileFields: ['emails', 'displayName', 'name', 'picture']
+  },
+  function(accessToken, refreshToken, profile, cb) {
+      return cb(null, profile);
+  }
+));
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+    cb(null, obj);
+});
+
+app.use(expressSession({
+    secret: 'jayantpatilapp',
+    resave: true,
+    saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/login/facebook', passport.authenticate('facebook', { scope:['email']}));
+app.get('/facebook', passport.authenticate('facebook'),(req, res) => {
+  res.redirect('/');
+});
+
+app.get('',(req, res) => {
+  res.send(req.user? req.user: 'Not logged in, login with facebook');
+})
+
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
