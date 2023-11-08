@@ -2,7 +2,11 @@ const passport = require('passport');
 // const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const expressSession = require('express-session');
-
+// Si el programa no compila o da algun tipo de error al usar passport, instalar las siguientes dependencias:
+// npm install passport
+// npm install passport-facebook
+// npm install express-session
+// Si al instalar todo lo anterior todavia da error entonces documente el codigo de passport y passport-facebook
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
