@@ -32,6 +32,15 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
+      categoriaNombre: {
+        type: Sequelize.STRING,
+        references: {
+          model: 'Categoria', // Nombre de la tabla referenciada
+          key: 'Nombre' // Clave primaria de la tabla referenciada
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
       createdAt: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')

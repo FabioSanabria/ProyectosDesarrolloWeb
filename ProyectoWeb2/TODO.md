@@ -1,5 +1,6 @@
-1) En la página de Feed y Publicación deben salir los nombres de los autores en vez de su ID para cada publicación.
-2) Mostrar imágenes en vez del nombre de la imagen (Si posible, también pueden ser links para no tenerlas local)
-3) Ajustar Views para que usen un template en común
+1) En la pï¿½gina de Feed y Publicaciï¿½n deben salir los nombres de los autores en vez de su ID para cada publicaciï¿½n.
+2) Mostrar imï¿½genes en vez del nombre de la imagen (Si posible, tambiï¿½n pueden ser links para no tenerlas local)
+3) Ajustar Views para que usen un template en comï¿½n
 4) Revisar dependencias de Routers a Controllers, ordenar si es posible.
-5) Checkear requerimientos de filtración por autor/categoría para ver si se tiene que ver igual que en el Feed.
+5) Checkear requerimientos de filtraciï¿½n por autor/categorï¿½a para ver si se tiene que ver igual que en el Feed.
+6) Ver autenticaciÃ³n con Facebook

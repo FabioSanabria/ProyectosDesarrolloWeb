@@ -45,10 +45,10 @@ class PublicacionController {
         try {
             const publicaciones = await Publicacion.findAll({
                 raw: true,
-                where: { Categoria: req.params.Categoria },
+                where: { categoriaNombre: req.params.nombre },
                 order: [['Fecha', 'DESC']]
             });
-            res.render('../views/Categoria', { publicaciones });
+            res.render('../views/categoria', { publicaciones });
         } catch (err) {
             console.log(err);
         }
@@ -77,31 +77,50 @@ class PublicacionController {
         }
     }
 
+    async obtenerNombreDelAutorDeUnaPublicacion(req, res) {
+        try {
+            const publicacion = await Publicacion.findByPk(publicacionId);
+
+            if (publicacion) {
+              const autor = await publicacion.getAutor();
+            
+              if (autor) {
+                res.render('../views/autor', { autor });
+              } else {
+                console.log('No se encontrÃ³ el autor de esta publicaciÃ³n.');
+              }
+            } else {
+              console.log('La publicaciÃ³n no se encontrÃ³.');
+            }
+        } catch (err) {
+            console.log('Error al obtener el autor de la publicaciÃ³n.');
+        }
+    }
+
     async mostrarPublicacionIndividual(req, res) {
         try {
-            // Obtener la publicación por su ID
+            // Obtener la publicaciï¿½n por su ID
             const publicacion = await Publicacion.findOne({
                 where: { ID: req.params.id }
             });
 
             if (!publicacion) {
-                // Manejar caso en el que la publicación no se encuentra
-                return res.status(404).send('Publicación no encontrada');
+                // Manejar caso en el que la publicaciï¿½n no se encuentra
+                return res.status(404).send('Publicaciï¿½n no encontrada');
             }
 
-            // Renderiza una vista EJS para mostrar la publicación individual
+            // Renderiza una vista EJS para mostrar la publicaciï¿½n individual
             res.render('../views/publicacion_completa', { publicacion });
         } catch (err) {
             console.log(err);
-            res.status(500).send('Error al obtener la publicación');
+            res.status(500).send('Error al obtener la publicaciï¿½n');
         }
     }
 
-
     async obtenerPublicacionesPaginadas(req, res) {
-        // Página actual (Por defecto 1)
+        // Pï¿½gina actual (Por defecto 1)
         const page = req.query.page || 1;
-         // Publicaciones por página (Por Defecto 5)
+         // Publicaciones por pï¿½gina (Por Defecto 5)
         const perPage = parseInt(req.query.perPage) || 5;
 
         try {
@@ -115,7 +134,7 @@ class PublicacionController {
                 offset: offset,
             });
 
-            // Calcular el número total de páginas
+            // Calcular el nï¿½mero total de pï¿½ginas
             const totalPublicaciones = await Publicacion.count();
             const totalPages = Math.ceil(totalPublicaciones / perPage);
 
@@ -129,7 +148,5 @@ class PublicacionController {
         }
     }
 }
-
-
 
 module.exports = PublicacionController;

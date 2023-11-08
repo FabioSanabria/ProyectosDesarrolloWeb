@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       Publicacion.hasMany(models.Comentario, { foreignKey: 'publicacionId' }); // Relación con Comentario
+      Publicacion.belongsTo(models.Categoria, { foreignKey: 'categoriaNombre' }); // Relación con Categoria
     }
   }
 
@@ -24,9 +25,6 @@ module.exports = (sequelize, DataTypes) => {
     Titulo: {
       type: DataTypes.STRING
     },
-    Categoria: {
-      type: DataTypes.STRING
-    },
     Imagen: {
       type: DataTypes.STRING
     },
@@ -35,6 +33,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     autorId: {
       type: DataTypes.INTEGER // Clave foránea para establecer la relación
+    },
+    categoriaNombre: {
+      type: DataTypes.STRING // Clave foránea para establecer la relación
     }
   }, {
     sequelize,
