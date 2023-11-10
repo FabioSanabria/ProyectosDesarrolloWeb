@@ -19,6 +19,8 @@ var pubFeedRouter = require('./routes/pubFeedRouter');
 var pubAutorRouter = require('./routes/pubAutorRouter');
 var pubCategoriaRouter = require('./routes/pubCategoriaRouter');
 var pubCompletaRouter = require('./routes/pubCompletaRouter');
+var comentariosRouter = require('./routes/comentariosRouter');
+
 
 
 var app = express();
@@ -83,6 +85,7 @@ app.use('/publicaciones', pubFeedRouter);
 app.use('/autor', pubAutorRouter);
 app.use('/categoria', pubCategoriaRouter);
 app.use('/publicacion_completa', pubCompletaRouter);
+app.use('/comentarios', comentariosRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
