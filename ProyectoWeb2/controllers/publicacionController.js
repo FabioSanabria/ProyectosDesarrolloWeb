@@ -41,19 +41,6 @@ class PublicacionController {
         }
     }
 
-    async obtenerPublicacionesDeUnaCategoria(req, res) {
-        try {
-            const publicaciones = await Publicacion.findAll({
-                raw: true,
-                where: { categoriaNombre: req.params.nombre },
-                order: [['Fecha', 'DESC']]
-            });
-            res.render('../views/categoria', { publicaciones });
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
     async obtenerPublicacionesMasRecientes(req, res) {
         try {
             const publicaciones = await Publicacion.findAll({
@@ -145,6 +132,32 @@ class PublicacionController {
         } catch (err) {
             console.error(err);
             res.status(500).json({ error: 'Error al obtener las publicaciones paginadas' });
+        }
+    }
+
+    async obtenerPublicacionesPorCategoria(req, res) {
+        try {
+            const nombreCategoria = req.params.nombreCategoria;
+
+            // Verificar si la categoría existe
+            const categoria = await Categoria.findOne({
+                where: { Nombre: nombreCategoria }
+            });
+
+            if (!categoria) {
+                return res.status(404).send('Categoría no encontrada');
+            }
+
+            // Obtener las publicaciones asociadas a la categoría
+            const publicaciones = await Publicacion.findAll({
+                where: { categoriaId: categoria.id },
+                order: [['Fecha', 'DESC']]
+            });
+
+            res.render('../views/publicaciones', { publicaciones, categoria });
+        } catch (err) {
+            console.log(err);
+            res.status(500).send('Error al obtener las publicaciones por categoría');
         }
     }
 }
