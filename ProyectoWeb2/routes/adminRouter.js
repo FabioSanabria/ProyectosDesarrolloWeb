@@ -7,7 +7,6 @@ const autorController = new AutorController();
 const publicacionController = new PublicacionController();
 
 router.get('/', autorController.administrarAutores);
-router.get('/:id', autorController.obtenerAutorPorId);
 router.post('/', autorController.crearAutor);
 router.put('/:id', autorController.actualizarAutor);
 router.delete('/:id', autorController.eliminarAutor);

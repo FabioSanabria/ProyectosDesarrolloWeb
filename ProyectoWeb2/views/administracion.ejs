@@ -1,1 +1,38 @@
-<p>Connected</p>
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<title>Crear Autor</title>
+			</head>
+	<body>
+		<h2>Crear Autor</h2>
+
+		<!-- Formulario para crear autor -->
+		<form action="/administracion" method="post">
+
+			<label for="nombre">Nombre:</label>
+			<input type="text" id="nombre" name="nombre" required="">
+
+			<label for="apellido">Apellido:</label>
+			<input type="text" id="apellido" name="apellido" required="">
+
+			<label for="contraseña">Contraseña:</label>
+			<input type="password" id="contraseña" name="contraseña" required="">
+
+			<label for="tipo">Tipo:</label>
+				<select id="tipo" name="tipo" required="">
+				<option value="admin">Administrador</option>
+				<option value="autor">Autor</option>
+				<option value="organizacion">Organización</option>
+				</select>
+
+			<button type="submit">Crear Autor</button>
+		</form>
+
+		
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.3/motion-ui.min.js"></script>
+	</body>
+</html>

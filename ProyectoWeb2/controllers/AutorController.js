@@ -28,7 +28,7 @@ class AutorController {
                 Contrasena: req.body.contraseña,
                 Tipo: req.body.tipo
             });
-            res.redirect('../views/autor');
+            res.redirect('/administracion');
         } catch (err) {
             console.log(err);
         }
@@ -44,7 +44,7 @@ class AutorController {
             }, {
                 where: { ID: req.params.id }
             });
-            res.redirect('../views/autor');
+            res.redirect('/administracion');
         } catch (err) {
             console.log(err);
         }
@@ -55,7 +55,7 @@ class AutorController {
             await autor.destroy({
                 where: { ID: req.params.id }
             });
-            res.redirect('../views/autor');
+            res.redirect('/administracion');
         } catch (err) {
             console.log(err);
         }
