@@ -57,7 +57,7 @@ class PublicacionController {
             await Publicacion.destroy({
                 where: { autorId: req.params.autorId }
             });
-            res.redirect('../views/publicaciones');
+            res.redirect('../views/administracion');
         } catch (err) {
             console.log(err);
         }

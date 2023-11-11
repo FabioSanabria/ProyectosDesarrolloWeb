@@ -3,7 +3,9 @@ const comentario = require('../models').Comentario;
 class ComentarioController {
     async obtenerComentariosDeUnaPublicacion(req, res) {
         try {
-            const comentariosPublicacion = await comentario.findAll();
+            const comentariosPublicacion = await comentario.findAll({
+                where: { publicacionId: req.params.publicacionId }
+            });
             res.render('../views/comentarios', { comentariosPublicacion });
         } catch (err) {
             console.log(err);
@@ -17,7 +19,7 @@ class ComentarioController {
                 Correo: req.body.Correo,
                 publicacionId: req.body.publicacionId
             });
-            res.redirect('../views/comentarios');
+            res.redirect(`../comentarios/${req.body.publicacionId}`);
         } catch (err) {
             console.log(err);
         }
