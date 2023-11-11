@@ -11,6 +11,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet" type="text/css">
   </head>
   <body>
+  <section class="grid-container">
     <h2>Comentarios</h2>
     <!-- Mostrar los comentarios existentes -->
     <% if (comentariosPublicacion && comentariosPublicacion.length > 0) { %>
@@ -22,7 +23,7 @@
     <% } %>
 
     <!-- Formulario para agregar comentario -->
-    <h3>Añadir Comentario</h3>
+    <h3>Comentar</h3>
     <form action="/comentarios" method="post">
 
         <label for="Correo">Correo:</label>
@@ -33,19 +34,22 @@
 
         <!-- Pasa el valor de publicacionId desde el controlador -->
         <input type="hidden" id="publicacionId" name="publicacionId" value="<%= typeof postId !== 'undefined' ? postId : 'not found' %>">
-        <button type="submit">Añadir Comentario</button>
+        
+        <div class="button">
+            <button type="submit">Agregar Comentario</button>
+        </div>
     </form>
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.3/motion-ui.min.js"></script>
-<script>
-    // Extract post ID from the URL
-    const postId = window.location.pathname.split('/').pop();
+    <script>
+        // Extract post ID from the URL
+        const postId = window.location.pathname.split('/').pop();
 
-    // Set the value of the hidden input field
-    document.getElementById('publicacionId').value = postId;
-</script>
-
+        // Set the value of the hidden input field
+        document.getElementById('publicacionId').value = postId;
+    </script>
+    </section>
   </body>
 </html>
