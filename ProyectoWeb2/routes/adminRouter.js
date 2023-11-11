@@ -1,9 +1,16 @@
-nst express = require('express');
+const express = require('express');
 const router = express.Router();
-const ComentarioController = require('../controllers/comentarioController'); // Importar el controlador
+const AutorController = require('../controllers/AutorController');
+const CategoriaController = require('../controllers/CategoriaController');
 
-const comentarioController = new ComentarioController(); // Crear una instancia del controlador
+const autorController = new AutorController();
+const categoriaController = new CategoriaController();
 
-
+// Rutas para el controlador de autor
+router.get('/:id', autorController.obtenerAutorPorId);
+router.post('/', autorController.crearAutor);
+router.put('/:id', autorController.actualizarAutor);
+router.delete('/:id', autorController.eliminarAutor);
+router.delete('/:id', categoriaController.eliminarPublicacionesDeUnAutor);
 
 module.exports = router;
