@@ -28,7 +28,7 @@ class AutorController {
                 Contrasena: req.body.contraseña,
                 Tipo: req.body.tipo
             });
-            res.redirect('/administracion');
+            res.redirect('/publicaciones');
         } catch (err) {
             console.log(err);
         }
@@ -75,7 +75,7 @@ class AutorController {
                 req.session.autorTipo = autorObtenible.Tipo;
                 res.redirect('/publicaciones');
             } else {
-                res.render('../views/login', { error: 'Usuario o contraseña incorrectos' });
+                res.render('../views/loginError');
             }
         } catch (err) {
             console.log(err);
