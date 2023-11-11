@@ -23,9 +23,10 @@ class AutorController {
     async crearAutor(req, res) {
         try {
             await autor.create({
-                nombre: req.body.nombre,
-                apellido: req.body.apellido,
-                contraseña: req.body.contraseña,
+                Nombre: req.body.nombre,
+                Apellido: req.body.apellido,
+                Contrasena: req.body.contraseña,
+                Tipo: req.body.tipo
             });
             res.redirect('../views/autor');
         } catch (err) {
@@ -36,11 +37,12 @@ class AutorController {
     async actualizarAutor(req, res) {
         try {
             await autor.update({
-                nombre: req.body.nombre,
-                apellido: req.body.apellido,
-                contraseña: req.body.contraseña,
+                Nombre: req.body.nombre,
+                Apellido: req.body.apellido,
+                Contrasena: req.body.contraseña,
+                Tipo: req.body.tipo,
             }, {
-                where: { id: req.params.id }
+                where: { ID: req.params.id }
             });
             res.redirect('../views/autor');
         } catch (err) {
@@ -51,9 +53,30 @@ class AutorController {
     async eliminarAutor(req, res) {
         try {
             await autor.destroy({
-                where: { id: req.params.id }
+                where: { ID: req.params.id }
             });
             res.redirect('../views/autor');
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async autenticarAutor(req, res) {
+        try {
+            const autorObtenible = await autor.findOne({
+                where: {
+                    Nombre: req.body.nombre,
+                    Contrasena: req.body.contrasena
+                }
+            });
+            if (autorObtenible) {
+                req.session.autorId = autorObtenible.ID;
+                req.session.nombre = autorObtenible.Nombre
+                req.session.autorTipo = autorObtenible.Tipo;
+                res.redirect('../views/index');
+            } else {
+                res.render('../views/login', { error: 'Usuario o contraseña incorrectos' });
+            }
         } catch (err) {
             console.log(err);
         }

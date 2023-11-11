@@ -9,7 +9,6 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       Publicacion.hasMany(models.Comentario, { foreignKey: 'publicacionId' }); // Relación con Comentario
-      Publicacion.belongsTo(models.Categoria, { foreignKey: 'categoriaNombre' }); // Relación con Categoria
     }
   }
 
