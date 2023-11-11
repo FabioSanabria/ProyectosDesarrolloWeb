@@ -6,8 +6,8 @@ class PublicacionController {
     async obtenerTodasLasPublicaciones(req, res) {
         try {
             const publicaciones = await Publicacion.findAll();
-            autorTipo = req.session.autorTipo;
-            res.render('../views/publicaciones', { publicaciones , autorTipo });
+            const user = req.session.user_data;
+            res.render('../views/publicaciones', { publicaciones , user });
         } catch (err) {
             console.log(err);
         }

@@ -70,9 +70,10 @@ class AutorController {
                 }
             });
             if (autorObtenible) {
-                req.session.autorId = autorObtenible.ID;
-                req.session.nombre = autorObtenible.Nombre
-                req.session.autorTipo = autorObtenible.Tipo;
+                autorId = autorObtenible.ID;
+                nombre = autorObtenible.Nombre
+                autorTipo = autorObtenible.Tipo;
+                req.session.user_data = { autorId, nombre, autorTipo };
                 res.redirect('/publicaciones');
             } else {
                 res.render('../views/loginError');
