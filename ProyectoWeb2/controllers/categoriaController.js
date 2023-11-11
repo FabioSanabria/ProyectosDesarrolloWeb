@@ -1,14 +1,6 @@
 const categoria = require('../models').Categoria;
 
 class CategoriaController {
-    async obtenerTodasLasCategorias(req, res) {
-        try {
-            const categorias = await categoria.findAll();
-            res.render('../views/publicaciones', { categorias });
-        } catch (err) {
-            console.log(err);
-        }
-    }
     
     async obtenerCategoriaPorNombre(req, res) {
         try {

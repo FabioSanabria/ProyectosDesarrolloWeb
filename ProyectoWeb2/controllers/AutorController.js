@@ -2,15 +2,6 @@ const autor = require('../models').Autor;
 
 class AutorController {
 
-    async obtenerTodosLosAutores(req, res) {
-        try {
-            const autores = await autor.findAll();
-            res.render('../views/publicaciones', { autores });
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
     async obtenerAutorPorId(req, res) {
         try {
             const autorObtenible = await autor.findByPk(req.params.id);
@@ -70,9 +61,10 @@ class AutorController {
                 }
             });
             if (autorObtenible) {
-                req.session.autorId = autorObtenible.ID;
-                req.session.nombre = autorObtenible.Nombre
-                req.session.autorTipo = autorObtenible.Tipo;
+                autorId = autorObtenible.ID;
+                nombre = autorObtenible.Nombre
+                autorTipo = autorObtenible.Tipo;
+                req.session.user_data = { autorId, nombre, autorTipo };
                 res.redirect('/publicaciones');
             } else {
                 res.render('../views/loginError');
