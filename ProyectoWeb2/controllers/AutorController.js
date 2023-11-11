@@ -65,15 +65,15 @@ class AutorController {
         try {
             const autorObtenible = await autor.findOne({
                 where: {
-                    Nombre: req.body.nombre,
-                    Contrasena: req.body.contrasena
+                    Nombre: req.body.Nombre,
+                    Contrasena: req.body.Contrasena
                 }
             });
             if (autorObtenible) {
                 req.session.autorId = autorObtenible.ID;
                 req.session.nombre = autorObtenible.Nombre
                 req.session.autorTipo = autorObtenible.Tipo;
-                res.redirect('../views/index');
+                res.redirect('/publicaciones');
             } else {
                 res.render('../views/login', { error: 'Usuario o contraseña incorrectos' });
             }
