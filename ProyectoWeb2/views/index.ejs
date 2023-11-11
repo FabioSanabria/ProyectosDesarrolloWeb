@@ -30,11 +30,35 @@
       </div>
     </div>
     <section class="grid-container">
-      <div id="content">
-        <h1>Bienvenido a <%= title %></h1>
-        <button type="submit" class="button" style="color: white;"><a href="/publicaciones" style="color: inherit; text-decoration: none;">Ingresar como <strong>invitado</strong></a></button>
-        <button type="submit" class="button" style="color: white;"><a href="/login" style="color: inherit; text-decoration: none;">Ingresar como <strong>usuario</strong></a></button>
-      </div>
+    <table>
+      <tr>
+        <td>
+          <section class="grid-container">
+            <div id="content">
+              <h1>Bienvenido a <%= title %></h1>
+
+              <button type="submit" class="button" style="color: white;">
+                <a href="/publicaciones" style="color: inherit; text-decoration: none;">Ingresar como <strong>invitado</strong></a>
+              </button>
+
+              <button type="submit" class="button" style="color: white;">
+                <a href="/login" style="color: inherit; text-decoration: none;">Ingresar como <strong>usuario</strong></a>
+              </button>
+
+            </div>
+          </section>
+        </td>
+
+        <!-- Right Box -->
+        <td>
+          <h3>Registrarse como usuario</h3>
+          <p>Para ingresar a la plataforma de Diario Web utilice el nombre de usuario y clave de la cuenta, o por el contrario, entre en modo invitado.</p>
+          <h3> Creado por: </h3>
+          <ul><li>Fabio Sanabría C07194</li>
+          <li>Juan Aguilar C10144</li></ul>
+        </td>
+      </tr>
+    </table>
     </section>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>
