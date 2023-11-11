@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Publicación | Diario Web</title>
+    <title>Crear Publicacion | Diario Web</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.3/motion-ui.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-prototype.min.css">
@@ -12,32 +12,32 @@
   </head>
   <body>
     <div class="grid-container">
-      <h2>Crear Publicación</h2>
+      <h2>Crear Publicacion</h2>
 
-      <!-- Formulario para crear una publicación -->
-      <form action="/ruta-de-tu-api-para-crear-publicacion" method="post">
-        <label for="Fecha">Fecha:</label>
-        <input type="date" id="Fecha" name="Fecha" required>
+    <!-- Formulario para crear una publicación -->
+    <form action="/crearPub" method="post">
+      <label for="Fecha">Fecha:</label>
+      <input type="date" id="Fecha" name="Fecha" required>
 
-        <label for="Titulo">Título:</label>
-        <input type="text" id="Titulo" name="Titulo" required>
+      <label for="Titulo">Titulo:</label>
+      <input type="text" id="Titulo" name="Titulo" required>
 
-        <label for="Imagen">Imagen (URL):</label>
-        <input type="text" id="Imagen" name="Imagen" required>
+      <label for="Imagen">Imagen (URL):</label>
+      <input type="text" id="Imagen" name="Imagen" required>
 
-        <label for="Texto">Texto:</label>
-        <textarea id="Texto" name="Texto" required></textarea>
+      <label for="Texto">Texto:</label>
+      <textarea id="Texto" name="Texto" required></textarea>
 
-        <!-- Agregar campos adicionales para las llaves foráneas -->
-        <label for="autorId">ID del Autor:</label>
-        <input type="number" id="autorId" name="autorId" required>
+      <!-- Agregar campos adicionales para las llaves foráneas -->
+      <label for="autorId">ID del Autor:</label>
+      <input type="number" id="autorId" name="autorId" required>
 
-        <label for="categoriaId">ID de la Categoría:</label>
-        <input type="number" id="categoriaId" name="categoriaId" required>
+      <label for="categoriaId">ID de la Categoria:</label>
+      <input type="number" id="categoriaId" name="categoriaId" required>
 
-        <button type="submit">Crear Publicación</button>
-      </form>
+      <!-- Corregir el botón -->
+      <button type="submit" class="button">Crear Publicacion</button>
+    </form>
     </div>
-
   </body>
 </html>

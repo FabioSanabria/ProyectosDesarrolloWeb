@@ -17,7 +17,6 @@ class PublicacionController {
             await Publicacion.create({
                 Fecha: req.body.Fecha,
                 Titulo: req.body.Titulo,
-                Categoria: req.body.Categoria,
                 Imagen: req.body.Imagen,
                 Texto: req.body.Texto,
                 autorId: req.body.autorId

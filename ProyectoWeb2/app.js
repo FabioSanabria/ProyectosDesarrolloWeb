@@ -1,6 +1,3 @@
-const passport = require('passport');
-// const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const FacebookStrategy = require('passport-facebook').Strategy;
 const expressSession = require('express-session');
 // Si el programa no compila o da algun tipo de error al usar passport, instalar las siguientes dependencias:
 // npm install passport
@@ -20,6 +17,8 @@ var pubAutorRouter = require('./routes/pubAutorRouter');
 var pubCategoriaRouter = require('./routes/pubCategoriaRouter');
 var pubCompletaRouter = require('./routes/pubCompletaRouter');
 var comentariosRouter = require('./routes/comentariosRouter');
+var loginRouter = require('./routes/loginRouter');
+var crearPubRouter = require('./routes/crearPubRouter');
 
 var app = express();
 
@@ -49,6 +48,12 @@ app.use('/autor', pubAutorRouter);
 app.use('/categoria', pubCategoriaRouter);
 app.use('/publicacion_completa', pubCompletaRouter);
 app.use('/comentarios', comentariosRouter)
+app.use('/login', loginRouter);
+app.use('/crearPub', crearPubRouter);
+
+app.get('/crpublicacion', (req, res) => {
+    res.render('crearPublicacion'); // Asegúrate de que el nombre coincida con tu vista EJS
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
