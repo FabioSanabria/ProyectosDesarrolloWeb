@@ -9,7 +9,7 @@ class PublicacionController {
                 Titulo: req.body.Titulo,
                 Imagen: req.body.Imagen,
                 Texto: req.body.Texto,
-                autorId: req.body.autorId,
+                autorId: req.session.user_data.autorId,
                 categoriaId: req.body.categoriaId
             });
             res.redirect('../publicaciones');
