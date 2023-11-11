@@ -7,7 +7,7 @@ class PublicacionController {
         try {
             const publicaciones = await Publicacion.findAll();
             autorTipo = req.session.autorTipo;
-            res.render('../views/publicaciones', { publicaciones }, { autorTipo });
+            res.render('../views/publicaciones', { publicaciones , autorTipo });
         } catch (err) {
             console.log(err);
         }
