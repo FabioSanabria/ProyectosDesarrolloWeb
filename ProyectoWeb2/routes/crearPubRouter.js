@@ -5,6 +5,7 @@ const PublicacionController = require('../controllers/publicacionController');
 const publicacionController = new PublicacionController();
 
 // Ruta para crear una publicación.
-router.post('/crearPub', publicacionController.crearPublicacion);
+router.get('/', publicacionController.mostrarCrearPublicacion);
+router.post('/', publicacionController.crearPublicacion);
 
 module.exports = router;

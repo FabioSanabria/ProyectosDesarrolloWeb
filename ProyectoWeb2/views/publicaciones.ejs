@@ -15,14 +15,14 @@
     <div class="top-bar">
       <div class="top-bar-left">
         <ul class="menu">
-          <li class="menu-text">Organización o persona</li>
+          <li class="menu-text">TIPO DE USUARIO</li>
           <li><a href="/">Volver</a></li>
         </ul>
       </div>
       <div class="top-bar-right">
         <ul class="menu">
           <li><a href="#">Acceso</a></li>
-          <li><a href="#">Administración</a></li>
+          <li><a href="/administracion">Administrar</a></li>
         </ul>
       </div>
     </div>
@@ -55,6 +55,10 @@
                 <!-- Autores se cargan -->
                     <li><a href="/autor/<%= autor.ID %>"><%= autor.Nombre %> <%= autor.Apellido %></a></li>
                 <% }); %>
+            </ul>
+            <h4>Aportar</h4>
+            <ul id="crear-container">
+                <li><a href="/crearPublicacion">Agregar publicaciones</a></li>
             </ul>
           </div>
         </aside>

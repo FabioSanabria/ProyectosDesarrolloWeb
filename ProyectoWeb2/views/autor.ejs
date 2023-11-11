@@ -11,22 +11,23 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet" type="text/css">
   </head>
   <body>
-    <!-- Start Top Bar -->
-    <div class="top-bar">
-      <div class="top-bar-left">
-        <ul class="menu">
-          <li class="menu-text">Organización o persona</li>
-          <li><a href="/publicaciones">Volver</a></li>
+	  <!-- Start Top Bar -->
+	  <div class="top-bar">
+		  <div class="top-bar-left">
+			  <ul class="menu">
+				  <li>
+					  <a href="/publicaciones">Volver</a>
+				  </li>
+			  </ul>
+		  </div>
+		  <div class="top-bar-right">
+			  <ul class="menu">
+				  <li>
+					  <%= new Date().toLocaleDateString() %><li>
         </ul>
-      </div>
-      <div class="top-bar-right">
-        <ul class="menu">
-          <li><a href="#">Acceso</a></li>
-          <li><a href="#">Administración</a></li>
-        </ul>
-      </div>
-    </div>
-    <!-- End Top Bar -->
+		  </div>
+	  </div>
+	  <!-- End Top Bar -->
     <div class="callout large primary">
       <div class="text-center">
         <h1>Diario web</h1>

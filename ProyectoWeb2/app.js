@@ -51,11 +51,7 @@ app.use('/publicacion_completa', pubCompletaRouter);
 app.use('/comentarios', comentariosRouter)
 app.use('/administracion', adminRouter)
 app.use('/login', loginRouter);
-app.use('/crearPub', crearPubRouter);
-
-app.get('/crpublicacion', (req, res) => {
-    res.render('crearPublicacion'); // Asegúrate de que el nombre coincida con tu vista EJS
-});
+app.use('/crearPublicacion', crearPubRouter);
 
 app.get('/logging', (req, res) => {
     res.render('login'); // Asegúrate de que el nombre coincida con tu vista EJS

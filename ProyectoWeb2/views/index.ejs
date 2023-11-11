@@ -15,13 +15,11 @@
     <div class="top-bar">
       <div class="top-bar-left">
         <ul class="menu">
-          <li class="menu-text">Organización o persona</li>
         </ul>
       </div>
       <div class="top-bar-right">
         <ul class="menu">
-          <li><a href="#">Acceso</a></li>
-          <li><a href="#">Administración</a></li>
+            <li><%= new Date().toLocaleDateString() %><li>
         </ul>
       </div>
     </div>
@@ -33,8 +31,9 @@
     </div>
     <section class="grid-container">
       <div id="content">
-        <p>Bienvenido a <%= title %></p>
-        <a href="/publicaciones">Ver Publicaciones</a>
+        <h1>Bienvenido a <%= title %></h1>
+        <h3 ><a href="/publicaciones">Ingresar como invitado</a></h3>
+        <h3><a href="#">Ingresar como usuario</a></h3>
       </div>
     </section>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>

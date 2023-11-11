@@ -19,9 +19,10 @@ class PublicacionController {
                 Titulo: req.body.Titulo,
                 Imagen: req.body.Imagen,
                 Texto: req.body.Texto,
-                autorId: req.body.autorId
+                autorId: req.body.autorId,
+                categoriaId: req.body.categoriaId
             });
-            res.redirect('../views/publicaciones');
+            res.redirect('../publicaciones');
         } catch (err) {
             console.log(err);
         }
@@ -157,6 +158,14 @@ class PublicacionController {
         } catch (err) {
             console.log(err);
             res.status(500).send('Error al obtener las publicaciones por categoría');
+        }
+    }
+
+    async mostrarCrearPublicacion(req, res) {
+        try {
+            res.render('../views/crearPublicacion');
+        } catch (err) {
+            console.log(err);
         }
     }
 }
