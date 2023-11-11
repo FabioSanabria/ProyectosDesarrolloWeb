@@ -10,15 +10,6 @@ class CategoriaController {
             console.log(err);
         }
     }
-
-    async obtenerCategorias(req, res) {
-        try {
-            const categorias = await categoria.findAll();
-            res.render('../views/publicaciones', { categorias });
-        } catch (err) {
-            console.log(err);
-        }
-    }
 }
 
 module.exports = CategoriaController;
