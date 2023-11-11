@@ -7,7 +7,16 @@ class PublicacionController {
         try {
             const publicaciones = await Publicacion.findAll();
             const user = req.session.user_data;
-            res.render('../views/publicaciones', { publicaciones , user });
+            res.render('../views/publicaciones', { publicaciones});
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async enviarUsuarioDeLaSesion(req, res) {
+        try {
+            const user = req.session.user_data;
+            res.render('../views/publicaciones', { user });
         } catch (err) {
             console.log(err);
         }

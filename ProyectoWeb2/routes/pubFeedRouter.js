@@ -17,6 +17,9 @@ router.get('/', categoriaController.obtenerTodasLasCategorias);
 // Ruta para obtener todas las publicaciones.
 router.get('/', publicacionController.obtenerTodasLasPublicaciones);
 
+// Ruta para obtener el usuario de al sesion.
+router.get('/', publicacionController.enviarUsuarioDeLaSesion);
+
 // Ruta para obtener las publicaciones páginadas.
 router.get('/paginadas', publicacionController.obtenerPublicacionesPaginadas);
 
