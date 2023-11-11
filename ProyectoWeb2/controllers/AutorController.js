@@ -89,6 +89,14 @@ class AutorController {
             console.log(err);
         }
     }
+
+    async ingresarAutor(req, res) {
+        try {
+            res.render('../views/login');
+        } catch (err) {
+            console.log(err);
+        }
+    }
 }
 
 module.exports = AutorController;

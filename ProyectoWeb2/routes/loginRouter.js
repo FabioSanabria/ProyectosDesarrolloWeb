@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const autorController = require('../controllers/autorController'); // Importar el controlador
+const AutorController = require('../controllers/AutorController'); // Importar el controlador
 
-const AutorController = new autorController(); // Crear una instancia del controlador
+const autorController = new AutorController(); // Crear una instancia del controlador
 
-router.post('/login', AutorController.autenticarAutor);
+router.get('/', autorController.ingresarAutor);
+router.post('/', autorController.autenticarAutor);
 
 module.exports = router;
