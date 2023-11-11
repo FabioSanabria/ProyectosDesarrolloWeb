@@ -23,18 +23,29 @@
 
     <!-- Formulario para agregar comentario -->
     <h3>Añadir Comentario</h3>
-    <form action="/ruta-de-tu-api-para-crear-comentario" method="post">
-        <label for="Texto">Texto del comentario:</label>
-        <input type="text" id="Texto" name="Texto" required>
+    <form action="/comentarios" method="post">
 
         <label for="Correo">Correo:</label>
         <input type="email" id="Correo" name="Correo" required>
 
-        <input type="hidden" id="publicacionId" name="publicacionId" value="<%= publicacionId %>">
+        <label for="Texto">Texto del comentario:</label>
+        <input type="text" id="Texto" name="Texto" maxlength="200" required>
 
+        <!-- Pasa el valor de publicacionId desde el controlador -->
+        <input type="hidden" id="publicacionId" name="publicacionId" value="<%= typeof postId !== 'undefined' ? postId : 'not found' %>">
         <button type="submit">Añadir Comentario</button>
     </form>
 
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.3/motion-ui.min.js"></script>
+<script>
+    // Extract post ID from the URL
+    const postId = window.location.pathname.split('/').pop();
+
+    // Set the value of the hidden input field
+    document.getElementById('publicacionId').value = postId;
+</script>
 
   </body>
 </html>

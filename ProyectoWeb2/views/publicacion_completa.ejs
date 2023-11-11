@@ -49,7 +49,7 @@
           <p>Autor: <a href="/autor/<%=publicacion.autorId%>"><%=publicacion.autorId%></a></p>
           <p><%= publicacion.Fecha %></p>
           <p><%= publicacion.Categoria %></p>
-        </aside>
+          <p><a href="#" onclick="openPopup('/comentarios/<%=publicacion.ID%>');">Comentarios</a></p>
       </div>
     </section>
       </div>
@@ -57,5 +57,18 @@
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.3/motion-ui.min.js"></script>
+
+        <script>
+        function openPopup(url) {
+            var popup = window.open(url, 'Comentarios', 'width=600,height=400');
+            
+            if (window.focus) {
+                popup.focus();
+            }
+
+            return false;
+        }
+    </script>
+
   </body>
 </html>
