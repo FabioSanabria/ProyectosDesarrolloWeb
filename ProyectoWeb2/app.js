@@ -53,9 +53,7 @@ app.use('/administracion', adminRouter)
 app.use('/login', loginRouter);
 app.use('/crearPublicacion', crearPubRouter);
 
-app.get('/logging', (req, res) => {
-    res.render('login'); // Asegúrate de que el nombre coincida con tu vista EJS
-});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

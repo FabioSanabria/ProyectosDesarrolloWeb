@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.3/motion-ui.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-prototype.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet" type="text/css">
+    <style>
+      .banner-image {
+        width: 100%; /* Set the width to 100% of its container */
+        height: auto; /* Maintain the aspect ratio */
+        max-width: 600px; /* Set a maximum width for the image */
+        max-height: 200px; /* Set a maximum height for the image */
+      }
+    </style>
   </head>
   <body>
     <!-- Start Top Bar -->
@@ -90,7 +98,8 @@
                         $('#publicaciones-container').append(
                             `<li>
                                 <h2><a href="/publicacion_completa/${publicacion.ID} ">${publicacion.Titulo}</a></h2>
-                                <p>${publicacion.Imagen}</p>
+                                <p><img src="${publicacion.Imagen}" class="banner-image"
+                                onerror="this.src='https://static.vecteezy.com/system/resources/thumbnails/000/701/690/small/abstract-polygonal-banner-background.jpg';"></p>
                                 <p>Fecha: ${publicacion.Fecha}</p>
                                 <p>Categoria: ${publicacion.Categoria}</p>
                                 <p>Autor: <a href="/autor/${publicacion.autorId}">${publicacion.autorId}</a></p>

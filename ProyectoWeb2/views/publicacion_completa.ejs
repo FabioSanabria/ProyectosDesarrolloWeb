@@ -40,8 +40,9 @@
     <section class="grid-container">
       <div class="grid-x grid-margin-x">
         <div class="medium-9 cell">
-          <p><%= publicacion.Imagen %></p>
-          <p><%= publicacion.Texto %></p>
+          <p><img src="<%=publicacion.Imagen%>" class="banner-image"
+            onerror="this.src='https://static.vecteezy.com/system/resources/thumbnails/000/701/690/small/abstract-polygonal-banner-background.jpg';"></p>
+        <p><%= publicacion.Texto %></p>
         </div>
         <aside class="medium-3 cell" data-sticky-container="">
           <p>Autor: <a href="/autor/<%=publicacion.autorId%>"><%=publicacion.autorId%></a></p>
