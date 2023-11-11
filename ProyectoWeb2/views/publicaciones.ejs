@@ -67,10 +67,12 @@
                     <li><a href="/autor/<%= autor.ID %>"><%= autor.Nombre %> <%= autor.Apellido %></a></li>
                 <% }); %>
             </ul>
-            <h4>Aportar</h4>
-            <ul id="crear-container">
-                <li><a href="/crearPublicacion">Agregar publicaciones</a></li>
-            </ul>
+            <% if (user.autorTipo !== 'Invitado') { %>
+                <h4>Aportar</h4>
+                <ul id="crear-container">
+                    <li><a href="/crearPublicacion">Agregar publicaciones</a></li>
+                </ul>
+            <% } %>
           </div>
         </aside>
       </div>
