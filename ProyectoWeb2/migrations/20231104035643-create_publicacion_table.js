@@ -14,9 +14,6 @@ module.exports = {
       Titulo: {
         type: Sequelize.STRING
       },
-      Categoria: {
-        type: Sequelize.STRING
-      },
       Imagen: {
         type: Sequelize.STRING
       },
@@ -31,7 +28,7 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
-      },
+       },
       createdAt: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
