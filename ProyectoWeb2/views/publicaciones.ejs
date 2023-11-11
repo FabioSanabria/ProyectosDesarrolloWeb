@@ -19,21 +19,25 @@
     </style>
   </head>
   <body>
-    <!-- Start Top Bar -->
-    <div class="top-bar">
-      <div class="top-bar-left">
-        <ul class="menu">
-          <li class="menu-text">TIPO DE USUARIO</li>
-        </ul>
-      </div>
-      <div class="top-bar-right">
-        <ul class="menu">
-          <li><a href="/login">Acceso</a></li>
-          <li><a href="/administracion">Administrar</a></li>
-        </ul>
-      </div>
-    </div>
-    <!-- End Top Bar -->
+<!-- Start Top Bar -->
+<div class="top-bar">
+  <div class="top-bar-left">
+    <ul class="menu">
+      <li class="menu-text"><%= user.autorTipo %></li>
+    </ul>
+  </div>
+  <div class="top-bar-right">
+    <ul class="menu">
+      <% if (user.autorTipo === 'Invitado') { %>
+        <li><a href="/login">Acceso</a></li>
+      <% } else if (user.autorTipo === 'admin') { %>
+        <li><a href="/administracion">Administrar</a></li>
+      <% } %>
+    </ul>
+  </div>
+</div>
+<!-- End Top Bar -->
+
     <div class="callout large primary">
       <div class="text-center">
         <h1>Diario web</h1>

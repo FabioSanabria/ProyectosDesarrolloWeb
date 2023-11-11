@@ -2,25 +2,6 @@ const Publicacion = require('../models').Publicacion;
 
 class PublicacionController {
 
-
-    async obtenerTodasLasPublicaciones(req, res) {
-        try {
-            const publicaciones = await Publicacion.findAll();
-            res.render('../views/publicaciones', { publicaciones});
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
-    async enviarUsuarioDeLaSesion(req, res) {
-        try {
-            const user = req.session.user_data;
-            res.render('../views/publicaciones', { user });
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
     async crearPublicacion(req, res) {
         try {
             await Publicacion.create({

@@ -2,15 +2,6 @@ const autor = require('../models').Autor;
 
 class AutorController {
 
-    async obtenerTodosLosAutores(req, res) {
-        try {
-            const autores = await autor.findAll();
-            res.render('../views/publicaciones', { autores });
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
     async obtenerAutorPorId(req, res) {
         try {
             const autorObtenible = await autor.findByPk(req.params.id);
