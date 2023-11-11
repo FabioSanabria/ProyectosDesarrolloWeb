@@ -5,6 +5,6 @@ const PublicacionController = require('../controllers/publicacionController');
 const publicacionController = new PublicacionController();
 
 // Ruta para obtener todos la publicación.
-router.get('/:Categoria', publicacionController.obtenerPublicacionesDeUnaCategoria);
+router.get('/:Categoria', publicacionController.obtenerPublicacionesPorCategoria);
 
 module.exports = router;
