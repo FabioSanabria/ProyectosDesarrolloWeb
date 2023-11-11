@@ -57,6 +57,9 @@ app.get('/crpublicacion', (req, res) => {
     res.render('crearPublicacion'); // Asegúrate de que el nombre coincida con tu vista EJS
 });
 
+app.get('/logging', (req, res) => {
+    res.render('login'); // Asegúrate de que el nombre coincida con tu vista EJS
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

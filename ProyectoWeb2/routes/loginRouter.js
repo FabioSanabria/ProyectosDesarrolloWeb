@@ -4,6 +4,6 @@ const autorController = require('../controllers/autorController'); // Importar e
 
 const AutorController = new autorController(); // Crear una instancia del controlador
 
-router.get('/login', AutorController.autenticarAutor);
+router.post('/login', AutorController.autenticarAutor);
 
 module.exports = router;
