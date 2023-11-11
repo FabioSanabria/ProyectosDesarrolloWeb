@@ -20,6 +20,7 @@ var pubAutorRouter = require('./routes/pubAutorRouter');
 var pubCategoriaRouter = require('./routes/pubCategoriaRouter');
 var pubCompletaRouter = require('./routes/pubCompletaRouter');
 var comentariosRouter = require('./routes/comentariosRouter');
+var adminRouter = require('./routes/adminRouter');
 
 var app = express();
 
@@ -49,6 +50,7 @@ app.use('/autor', pubAutorRouter);
 app.use('/categoria', pubCategoriaRouter);
 app.use('/publicacion_completa', pubCompletaRouter);
 app.use('/comentarios', comentariosRouter)
+app.use('/administracion', adminRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

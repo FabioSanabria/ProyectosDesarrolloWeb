@@ -81,6 +81,14 @@ class AutorController {
             console.log(err);
         }
     }
+
+    async administrarAutores(req, res) {
+        try {
+            res.render('../views/administracion');
+        } catch (err) {
+            console.log(err);
+        }
+    }
 }
 
 module.exports = AutorController;
