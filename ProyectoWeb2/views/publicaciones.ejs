@@ -113,7 +113,7 @@
                     const publicaciones = data.publications;
                     const totalPages = data.totalPages;
                     const categorias = data.categorias;
-
+                    const autores = data.autores;
 
                     // Limpia el contenedor de publicaciones
                     $('#publicaciones-container').empty();
@@ -122,6 +122,7 @@
                     publicaciones.forEach(function (publicacion) {
                         const textoRecortado = publicacion.Texto.length > 300 ? publicacion.Texto.substring(0, 300) + "..." : publicacion.Texto;
                         const categoria = categorias.find(c => c.id === publicacion.categoriaId);
+                        const autor = autores.find(c => c.ID === publicacion.autorId);
                         
                         $('#publicaciones-container').append(
                             `<li class="con_linea">
@@ -130,7 +131,7 @@
                                 onerror="this.src='https://static.vecteezy.com/system/resources/thumbnails/000/701/690/small/abstract-polygonal-banner-background.jpg';"></p>
                                 <p>Publicado el ${formatDate(publicacion.Fecha)}</p>
                                 <p>Categoria: <a href="/categoria/${publicacion.categoriaId}">${categoria.Nombre}</a></p>
-                                <p>Publicado por <a href="/autor/${publicacion.autorId}">${publicacion.autorId}</a></p>
+                                <p>Publicado por <a href="/autor/${publicacion.autorId}">${autor.Nombre} ${autor.Apellido}</a></p>
                                 <p><strong>Resumen:</strong> ${textoRecortado}</p>
                             </li>`
                         );

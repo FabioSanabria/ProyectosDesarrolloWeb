@@ -45,11 +45,14 @@
         <p><%= publicacion.Texto %></p>
         </div>
         <aside class="medium-3 cell" data-sticky-container="">
-          <p>Publicado por <a href="/autor/<%=publicacion.autorId%>"><%=publicacion.autorId%></a></p>
+          <% var autor = autores.find(c => c.ID === publicacion.autorId); %>
+          <% var categoria = categorias.find(c => c.id === publicacion.categoriaId); %>
+          <p>Publicado por <a href="/autor/<%=publicacion.autorId%>"><%=autor.Nombre%> <%=autor.Apellido%></a></p>
           <p><%= formatDate(publicacion.Fecha) %></p>
-          <p>Categoria: <a href="/categoria/<%=publicacion.categoriaId%>"><%=publicacion.categoriaId%></a></p>
+          <p>Categoria: <a href="/categoria/<%=publicacion.categoriaId%>"><%=categoria.Nombre%></a></p>
           <p><a href="#" onclick="openPopup('/comentarios/<%=publicacion.ID%>');">Comentarios</a></p>
-      </div>
+        </aside>
+    </div>
     </section>
       </div>
     </section>

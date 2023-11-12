@@ -1,6 +1,7 @@
 const Publicacion = require('../models').Publicacion;
 const CategoriaController = require('./categoriaController');
 const categoria = require('../models').Categoria;
+const autor = require('../models').Autor;
 
 class PublicacionController {
 
@@ -89,8 +90,11 @@ class PublicacionController {
                 return res.status(404).send('Publicaci�n no encontrada');
             }
 
+            const autores = await autor.findAll();
+            const categorias = await categoria.findAll();
+
             // Renderiza una vista EJS para mostrar la publicaci�n individual
-            res.render('../views/publicacion_completa', { publicacion });
+            res.render('../views/publicacion_completa', { publicacion, autores, categorias });
         } catch (err) {
             console.log(err);
             res.status(500).send('Error al obtener la publicaci�n');
@@ -98,7 +102,7 @@ class PublicacionController {
     }
 
     async obtenerPublicacionesPaginadas(req, res) {
-        // P�gina actual (Por defecto 1)
+        // Pagina actual (Por defecto 1)
         const page = req.query.page || 1;
          // Publicaciones por p�gina (Por Defecto 5)
         const perPage = parseInt(req.query.perPage) || 5;
@@ -115,14 +119,16 @@ class PublicacionController {
             });
 
             const categorias = await categoria.findAll();
+            const autores = await autor.findAll();
 
-            // Calcular el n�mero total de p�ginas
+            // Calcular el numero total de paginas
             const totalPublicaciones = await Publicacion.count();
             const totalPages = Math.ceil(totalPublicaciones / perPage);
             res.json({
                 publications: publicaciones,
                 totalPages: totalPages,
-                categorias: categorias
+                categorias: categorias,
+                autores: autores
             });
         } catch (err) {
             console.error(err);
