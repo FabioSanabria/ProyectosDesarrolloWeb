@@ -104,6 +104,17 @@
         }
     </script>
     <script>
+        function getCommentText(commentCount) {
+            if (commentCount === 0) {
+                return "Sin comentarios";
+            } else if (commentCount === 1) {
+                return "Hay 1 comentario";
+            } else {
+                return `Hay ${commentCount} comentarios`;
+            }
+        }
+    </script>
+    <script>
         // Función para cargar más publicaciones mediante AJAX
         function cargarMasPublicaciones(page) {
             $.ajax({
@@ -114,6 +125,7 @@
                     const totalPages = data.totalPages;
                     const categorias = data.categorias;
                     const autores = data.autores;
+                    const comentarios = data.comentarios;
 
                     // Limpia el contenedor de publicaciones
                     $('#publicaciones-container').empty();
@@ -123,7 +135,9 @@
                         const textoRecortado = publicacion.Texto.length > 300 ? publicacion.Texto.substring(0, 300) + "..." : publicacion.Texto;
                         const categoria = categorias.find(c => c.id === publicacion.categoriaId);
                         const autor = autores.find(c => c.ID === publicacion.autorId);
-                        
+                        const comentariosPublicacion = comentarios.filter(c => c.publicacionId === publicacion.ID);
+                        console.log("DEBUG: ", comentariosPublicacion);
+
                         $('#publicaciones-container').append(
                             `<li class="con_linea">
                                 <h2><strong><a href="/publicacion_completa/${publicacion.ID} ">${publicacion.Titulo}</a></strong></h2>
@@ -132,6 +146,7 @@
                                 <p>Publicado el ${formatDate(publicacion.Fecha)}</p>
                                 <p>Categoria: <a href="/categoria/${publicacion.categoriaId}">${categoria.Nombre}</a></p>
                                 <p>Publicado por <a href="/autor/${publicacion.autorId}">${autor.Nombre} ${autor.Apellido}</a></p>
+                                <p>${getCommentText(comentariosPublicacion.length)}</p>
                                 <p><strong>Resumen:</strong> ${textoRecortado}</p>
                             </li>`
                         );

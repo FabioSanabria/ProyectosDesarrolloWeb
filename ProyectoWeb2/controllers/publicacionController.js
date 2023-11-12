@@ -2,6 +2,7 @@ const Publicacion = require('../models').Publicacion;
 const CategoriaController = require('./categoriaController');
 const categoria = require('../models').Categoria;
 const autor = require('../models').Autor;
+const comentario = require('../models').Comentario;
 
 class PublicacionController {
 
@@ -120,6 +121,7 @@ class PublicacionController {
 
             const categorias = await categoria.findAll();
             const autores = await autor.findAll();
+            const comentarios = await comentario.findAll();
 
             // Calcular el numero total de paginas
             const totalPublicaciones = await Publicacion.count();
@@ -128,7 +130,8 @@ class PublicacionController {
                 publications: publicaciones,
                 totalPages: totalPages,
                 categorias: categorias,
-                autores: autores
+                autores: autores,
+                comentarios: comentarios
             });
         } catch (err) {
             console.error(err);
