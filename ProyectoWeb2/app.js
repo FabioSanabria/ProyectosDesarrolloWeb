@@ -21,6 +21,8 @@ var adminRouter = require('./routes/adminRouter');
 var loginRouter = require('./routes/loginRouter');
 var crearPubRouter = require('./routes/crearPubRouter');
 var eliminarPubRouter = require('./routes/eliminarPubRouter');
+var crearCategoriaRouter = require('./routes/crearCategoriaRouter');
+
 var app = express();
 
 app.use(expressSession({
@@ -53,6 +55,7 @@ app.use('/administracion', adminRouter)
 app.use('/login', loginRouter);
 app.use('/crearPublicacion', crearPubRouter);
 app.use('/eliminarPublicacion', eliminarPubRouter);
+app.use('/crearCategoria', crearCategoriaRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

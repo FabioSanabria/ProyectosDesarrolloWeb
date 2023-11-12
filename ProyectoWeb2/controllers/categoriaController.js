@@ -29,6 +29,25 @@ class CategoriaController {
         }
     }
 
+    async crearCategoria(req, res) {
+        try {
+            await categoria.create({
+                Nombre: req.body.nombre
+            });
+            res.redirect('../publicaciones');
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async mostrarCrearCategoria(req, res) {
+        try {
+            res.render('../views/crearCategoria');
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
 }
 
 module.exports = CategoriaController;
