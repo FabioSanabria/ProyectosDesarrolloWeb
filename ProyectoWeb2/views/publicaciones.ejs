@@ -124,11 +124,11 @@
                         const textoRecortado = publicacion.Texto.length > 300 ? publicacion.Texto.substring(0, 300) + "..." : publicacion.Texto;
                         $('#publicaciones-container').append(
                             `<li class="con_linea">
-                                <h2><a href="/publicacion_completa/${publicacion.ID} ">${publicacion.Titulo}</a></h2>
+                                <h2><strong><a href="/publicacion_completa/${publicacion.ID} ">${publicacion.Titulo}</a></strong></h2>
                                 <p><img src="${publicacion.Imagen}" class="banner-image"
                                 onerror="this.src='https://static.vecteezy.com/system/resources/thumbnails/000/701/690/small/abstract-polygonal-banner-background.jpg';"></p>
                                 <p>Publicado el ${formatDate(publicacion.Fecha)}</p>
-                                <p>Categoria: ${publicacion.Categoria}</p>
+                                <p>Categoria: <a href="/categoria/${publicacion.categoriaId}">${publicacion.categoriaId}</a></p>
                                 <p>Publicado por <a href="/autor/${publicacion.autorId}">${publicacion.autorId}</a></p>
                                 <p><strong>Resumen:</strong> ${textoRecortado}</p>
                             </li>`
