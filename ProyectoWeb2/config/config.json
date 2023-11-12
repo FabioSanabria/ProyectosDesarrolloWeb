@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "diario_web",
-    "host": "127.0.0.1",
+    "username": "ec10144",
+    "password": "Xec10144!",
+    "database": "ci0137_ec10144",
+    "host": "10.1.4.63",
     "dialect": "mysql"
   },
   "test": {

@@ -33,6 +33,9 @@
       <% } else if (user.autorTipo === 'admin') { %>
         <li><a href="/administracion">Administrar</a></li>
       <% } %>
+        <% if (user.autorTipo !== 'Invitado') { %>
+        <li><a href="/">Cerrar Sesion</a></li>
+      <% } %>
     </ul>
   </div>
 </div>
@@ -53,11 +56,11 @@
         </div>
         <aside class="medium-3 cell" data-sticky-container="">
           <div class="sticky" data-sticky="" data-anchor="content">
-            <h4 hidden>Categorías</h4>
-            <ul id="categoria-container" hidden>
+            <h4>Categorias</h4>
+            <ul id="categoria-container">
                 <% categorias.forEach(categoria => { %>
                 <!-- Categorías se cargan -->
-                    <li><a href="/categoria/<%= categoria.ID %>"><%= categoria.Nombre %> </a></li>
+                    <li><a href="/categoria/<%= categoria.id %>"><%= categoria.Nombre %> </a></li>
                 <% }); %>
             </ul>
             <h4>Autores</h4>
@@ -71,7 +74,9 @@
                 <h4>Aportar</h4>
                 <ul id="crear-container">
                     <li><a href="/crearPublicacion">Agregar publicaciones</a></li>
-                    <li><a href="/eliminarPublicacion">Eliminar publicaciones</a></li>
+                    <% if (user.autorTipo === 'admin') { %>
+			            <li><a href="/eliminarPublicacion">Eliminar publicaciones</a></li>
+		            <% } %>
                 </ul>
             <% } %>
           </div>
