@@ -1,16 +1,18 @@
 const Publicacion = require('../models').Publicacion;
+const CategoriaController = require('./categoriaController');
 
 class PublicacionController {
 
     async crearPublicacion(req, res) {
         try {
+            var id = await CategoriaController.obtenerIdCategoriaPorNombre(req.body.categoria);
             await Publicacion.create({
                 Fecha: req.body.Fecha,
                 Titulo: req.body.Titulo,
                 Imagen: req.body.Imagen,
                 Texto: req.body.Texto,
                 autorId: req.session.user_data.autorId,
-                categoriaId: req.body.categoriaId
+                categoriaId: id
             });
             res.redirect('../publicaciones');
         } catch (err) {

@@ -10,6 +10,25 @@ class CategoriaController {
             console.log(err);
         }
     }
+    static async obtenerIdCategoriaPorNombre(nombreCategoria) {
+        try {
+            const categoriaObtenible = await categoria.findOne({
+                where: { Nombre: nombreCategoria }
+            });
+
+            if (categoriaObtenible) {
+                console.log('Categoria id en el categoria controller:' + categoriaObtenible.id);
+                return categoriaObtenible.id; // Return the ID as an integer
+            } else {
+                console.log('No se encontró la categoría con el nombre proporcionado.');
+                return null;
+            }
+        } catch (err) {
+            console.log(err);
+            return null;
+        }
+    }
+
 }
 
 module.exports = CategoriaController;
