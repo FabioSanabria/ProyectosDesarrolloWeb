@@ -16,6 +16,14 @@
         max-width: 600px; /* Set a maximum width for the image */
         max-height: 200px; /* Set a maximum height for the image */
       }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      li.con_linea {
+        border-bottom: 1px solid #ccc; /* Ajusta el estilo y color de la barra divisora según tus preferencias */
+        padding: 8px; /* Ajusta el espaciado interno según tus preferencias */
+      }
     </style>
   </head>
   <body>
@@ -60,20 +68,20 @@
             <ul id="categoria-container">
                 <% categorias.forEach(categoria => { %>
                 <!-- Categorías se cargan -->
-                    <li><a href="/categoria/<%= categoria.id %>"><%= categoria.Nombre %> </a></li>
+                    <li class="con_linea"><a href="/categoria/<%= categoria.id %>"><%= categoria.Nombre %> </a></li>
                 <% }); %>
             </ul>
             <h4>Autores</h4>
             <ul id="autor-container">
                 <% autores.forEach(autor => { %>
                 <!-- Autores se cargan -->
-                    <li><a href="/autor/<%= autor.ID %>"><%= autor.Nombre %> <%= autor.Apellido %></a></li>
+                    <li class="con_linea"><a href="/autor/<%= autor.ID %>"><%= autor.Nombre %> <%= autor.Apellido %></a></li>
                 <% }); %>
             </ul>
             <% if (user.autorTipo !== 'Invitado') { %>
                 <h4>Aportar</h4>
                 <ul id="crear-container">
-                    <li><a href="/crearPublicacion">Agregar publicaciones</a></li>
+                    <li class="con_linea"><a href="/crearPublicacion">Agregar publicaciones</a></li>
                     <% if (user.autorTipo === 'admin') { %>
 			            <li><a href="/eliminarPublicacion">Eliminar publicaciones</a></li>
 		            <% } %>
@@ -91,6 +99,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.3/motion-ui.min.js"></script>
     <script>
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const date = new Date(dateString);
+            const formattedDate = date.toLocaleDateString('es-ES', options);
+            return formattedDate;
+        }
+    </script>
+    <script>
         // Función para cargar más publicaciones mediante AJAX
         function cargarMasPublicaciones(page) {
             $.ajax({
@@ -107,14 +123,14 @@
                     publicaciones.forEach(function (publicacion) {
                         const textoRecortado = publicacion.Texto.length > 300 ? publicacion.Texto.substring(0, 300) + "..." : publicacion.Texto;
                         $('#publicaciones-container').append(
-                            `<li>
+                            `<li class="con_linea">
                                 <h2><a href="/publicacion_completa/${publicacion.ID} ">${publicacion.Titulo}</a></h2>
                                 <p><img src="${publicacion.Imagen}" class="banner-image"
                                 onerror="this.src='https://static.vecteezy.com/system/resources/thumbnails/000/701/690/small/abstract-polygonal-banner-background.jpg';"></p>
-                                <p>Fecha: ${publicacion.Fecha}</p>
+                                <p>Publicado el ${formatDate(publicacion.Fecha)}</p>
                                 <p>Categoria: ${publicacion.Categoria}</p>
-                                <p>Autor: <a href="/autor/${publicacion.autorId}">${publicacion.autorId}</a></p>
-                                <p>Texto: ${textoRecortado}</p>
+                                <p>Publicado por <a href="/autor/${publicacion.autorId}">${publicacion.autorId}</a></p>
+                                <p><strong>Resumen:</strong> ${textoRecortado}</p>
                             </li>`
                         );
                     });
