@@ -1,5 +1,6 @@
 const Publicacion = require('../models').Publicacion;
 const CategoriaController = require('./categoriaController');
+const categoria = require('../models').Categoria;
 
 class PublicacionController {
 
@@ -113,13 +114,15 @@ class PublicacionController {
                 offset: offset,
             });
 
+            const categorias = await categoria.findAll();
+
             // Calcular el n�mero total de p�ginas
             const totalPublicaciones = await Publicacion.count();
             const totalPages = Math.ceil(totalPublicaciones / perPage);
-
             res.json({
                 publications: publicaciones,
                 totalPages: totalPages,
+                categorias: categorias
             });
         } catch (err) {
             console.error(err);
