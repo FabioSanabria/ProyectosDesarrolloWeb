@@ -17,11 +17,10 @@
 
 		<p>Este campo es para eliminar la publicacion mediante ID, de verdad lo quieres hacer?</p>
 
-		<form action="/eliminarPublicacion" method="delete">
-			<input type="hidden" name="_method" value="delete">
-			<input type="text" id="id-publicacion" name="id-publicacion" placeholder="ID de la publicacion" required="">
-			<button type="submit" class="button alert">Eliminar publicacion</button>
-		</form>
+<form action="/eliminarPublicacion" method="post">
+    <input type="text" name="ID" placeholder="ID de la publicacion" required="">
+    <button type="submit" class="button alert">Eliminar publicacion</button>
+</form>
     </section>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>

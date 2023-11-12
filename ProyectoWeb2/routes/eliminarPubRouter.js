@@ -6,6 +6,6 @@ const publicacionController = new PublicacionController();
 
 // Ruta para crear una publicación.
 router.get('/', publicacionController.mostrarEliminarPublicacion);
-router.delete('/', publicacionController.eliminarPublicacion);
+router.post('/', publicacionController.eliminarPublicacion);
 
 module.exports = router;
