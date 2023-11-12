@@ -18,6 +18,17 @@ class PublicacionController {
         }
     }
 
+    async eliminarPublicacion(req, res) {
+        try {
+            await Publicacion.destroy({
+                where: { ID: req.body.ID }
+            });
+            res.redirect('../publicaciones');
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     async obtenerPublicacionesDeUnAutor(req, res) {
         try {
             const publicaciones = await Publicacion.findAll({
@@ -38,17 +49,6 @@ class PublicacionController {
                 order: [['Fecha', 'DESC']]
             });
             res.render('../views/publicaciones', { publicaciones });
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
-    async eliminarPublicacionesDeUnAutor(req, res) {
-        try {
-            await Publicacion.destroy({
-                where: { autorId: req.params.autorId }
-            });
-            res.redirect('../views/administracion');
         } catch (err) {
             console.log(err);
         }
@@ -125,35 +125,31 @@ class PublicacionController {
         }
     }
 
+
     async obtenerPublicacionesPorCategoria(req, res) {
         try {
-            const nombreCategoria = req.params.nombreCategoria;
-
-            // Verificar si la categoría existe
-            const categoria = await Categoria.findOne({
-                where: { Nombre: nombreCategoria }
-            });
-
-            if (!categoria) {
-                return res.status(404).send('Categoría no encontrada');
-            }
-
-            // Obtener las publicaciones asociadas a la categoría
             const publicaciones = await Publicacion.findAll({
-                where: { categoriaId: categoria.id },
+                raw: true,
+                where: { categoriaId: req.params.id },
                 order: [['Fecha', 'DESC']]
             });
-
-            res.render('../views/publicaciones', { publicaciones, categoria });
+            res.render('../views/categoria', { publicaciones });
         } catch (err) {
             console.log(err);
-            res.status(500).send('Error al obtener las publicaciones por categoría');
         }
     }
 
     async mostrarCrearPublicacion(req, res) {
         try {
             res.render('../views/crearPublicacion');
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async mostrarEliminarPublicacion(req, res) {
+        try {
+            res.render('../views/eliminarPublicacion');
         } catch (err) {
             console.log(err);
         }

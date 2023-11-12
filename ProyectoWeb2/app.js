@@ -20,7 +20,7 @@ var comentariosRouter = require('./routes/comentariosRouter');
 var adminRouter = require('./routes/adminRouter');
 var loginRouter = require('./routes/loginRouter');
 var crearPubRouter = require('./routes/crearPubRouter');
-
+var eliminarPubRouter = require('./routes/eliminarPubRouter');
 var app = express();
 
 app.use(expressSession({
@@ -52,7 +52,7 @@ app.use('/comentarios', comentariosRouter)
 app.use('/administracion', adminRouter)
 app.use('/login', loginRouter);
 app.use('/crearPublicacion', crearPubRouter);
-
+app.use('/eliminarPublicacion', eliminarPubRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

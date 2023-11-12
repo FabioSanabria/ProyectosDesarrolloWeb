@@ -10,6 +10,6 @@ router.get('/', autorController.administrarAutores);
 router.post('/', autorController.crearAutor);
 router.put('/:id', autorController.actualizarAutor);
 router.delete('/:id', autorController.eliminarAutor);
-router.delete('/:id', publicacionController.eliminarPublicacionesDeUnAutor);
+// router.delete('/:id', publicacionController.eliminarPublicacionesDeUnAutor);
 
 module.exports = router;

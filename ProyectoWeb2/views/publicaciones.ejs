@@ -55,7 +55,7 @@
           <div class="sticky" data-sticky="" data-anchor="content">
             <h4 hidden>Categorías</h4>
             <ul id="categoria-container" hidden>
-                <% autores.forEach(categoria => { %>
+                <% categorias.forEach(categoria => { %>
                 <!-- Categorías se cargan -->
                     <li><a href="/categoria/<%= categoria.ID %>"><%= categoria.Nombre %> </a></li>
                 <% }); %>
@@ -71,6 +71,7 @@
                 <h4>Aportar</h4>
                 <ul id="crear-container">
                     <li><a href="/crearPublicacion">Agregar publicaciones</a></li>
+                    <li><a href="/eliminarPublicacion">Eliminar publicaciones</a></li>
                 </ul>
             <% } %>
           </div>

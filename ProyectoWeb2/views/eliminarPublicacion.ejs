@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar publicación</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.3/motion-ui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-prototype.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+	<section class="grid-container">
+		<p><a href="/publicaciones">Volver</a></p>
+		<h2>Eliminar publicación</h2>
+
+		<p>Este campo es para eliminar la publicacion mediante ID, de verdad lo quieres hacer?</p>
+
+		<form action="/eliminarPublicacion" method="delete">
+			<input type="hidden" name="_method" value="delete">
+			<input type="text" id="id-publicacion" name="id-publicacion" placeholder="ID de la publicacion" required="">
+			<button type="submit" class="button alert">Eliminar publicacion</button>
+		</form>
+    </section>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.3/motion-ui.min.js"></script>
+  </body>
+</html>
