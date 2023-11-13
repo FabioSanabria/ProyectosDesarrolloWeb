@@ -4,7 +4,8 @@ const PublicacionController = require('../controllers/publicacionController');
 
 const publicacionController = new PublicacionController();
 
-// Ruta para obtener todos la publicación.
-router.get('/:id', publicacionController.obtenerPublicacionesPorCategoria);
+// Ruta para crear una publicación.
+router.get('/', publicacionController.mostrarEliminarPublicacion);
+router.post('/', publicacionController.eliminarPublicacion);
 
 module.exports = router;

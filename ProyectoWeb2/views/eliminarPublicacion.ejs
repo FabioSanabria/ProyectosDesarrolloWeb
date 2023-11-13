@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Administración</title>
+    <title>Eliminar publicacion</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.3/motion-ui.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation-prototype.min.css">
@@ -12,33 +12,15 @@
   </head>
   <body>
 	<section class="grid-container">
-		<p><a href="/publicaciones">Volver</a></p>
-		<h2>Inscribir usuario</h2>
-		<!-- Formulario para crear autor -->
-		<form action="/administracion" method="post">
+		<p><a href="/administracion">Volver</a></p>
+		<h2>Eliminar publicacion</h2>
 
-			<label for="nombre">Nombre:</label>
-			<input type="text" id="nombre" name="nombre" required="">
+		<p>Este campo es para eliminar la publicacion mediante ID, de verdad lo quieres hacer?</p>
 
-			<label for="apellido">Apellido:</label>
-			<input type="text" id="apellido" name="apellido" required="">
-
-			<label for="contraseña">Contraseña:</label>
-			<input type="password" id="contraseña" name="contraseña" required="">
-
-			<label for="tipo">Tipo:</label>
-				<select id="tipo" name="tipo" required="">
-				<option value="admin">Administrador</option>
-				<option value="autor">Autor</option>
-				<option value="organizacion">Organización</option>
-				</select>
-				<button type="submit" class="button">Inscribir usuario</button>
-		</form>
-	<h2>Otras opciones</h2>
-	<ul>
-		<li><a href="/eliminarPublicacion">Eliminar publicaciones</a></li>
-		<li><a href="/crearCategoria">Agregar Categoria</a></li>
-	</ul>
+<form action="/eliminarPublicacion" method="post">
+    <input type="text" name="ID" placeholder="ID de la publicacion" required="">
+    <button type="submit" class="button alert">Eliminar publicacion</button>
+</form>
     </section>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/js/foundation.min.js"></script>

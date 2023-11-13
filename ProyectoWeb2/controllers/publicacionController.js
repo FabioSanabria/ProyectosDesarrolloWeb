@@ -1,16 +1,32 @@
 const Publicacion = require('../models').Publicacion;
+const CategoriaController = require('./categoriaController');
+const categoria = require('../models').Categoria;
+const autor = require('../models').Autor;
+const comentario = require('../models').Comentario;
 
 class PublicacionController {
 
     async crearPublicacion(req, res) {
         try {
+            var id = await CategoriaController.obtenerIdCategoriaPorNombre(req.body.categoria);
             await Publicacion.create({
                 Fecha: req.body.Fecha,
                 Titulo: req.body.Titulo,
                 Imagen: req.body.Imagen,
                 Texto: req.body.Texto,
                 autorId: req.session.user_data.autorId,
-                categoriaId: req.body.categoriaId
+                categoriaId: id
+            });
+            res.redirect('../publicaciones');
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async eliminarPublicacion(req, res) {
+        try {
+            await Publicacion.destroy({
+                where: { ID: req.body.ID }
             });
             res.redirect('../publicaciones');
         } catch (err) {
@@ -38,17 +54,6 @@ class PublicacionController {
                 order: [['Fecha', 'DESC']]
             });
             res.render('../views/publicaciones', { publicaciones });
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
-    async eliminarPublicacionesDeUnAutor(req, res) {
-        try {
-            await Publicacion.destroy({
-                where: { autorId: req.params.autorId }
-            });
-            res.redirect('../views/administracion');
         } catch (err) {
             console.log(err);
         }
@@ -86,8 +91,11 @@ class PublicacionController {
                 return res.status(404).send('Publicaci�n no encontrada');
             }
 
+            const autores = await autor.findAll();
+            const categorias = await categoria.findAll();
+
             // Renderiza una vista EJS para mostrar la publicaci�n individual
-            res.render('../views/publicacion_completa', { publicacion });
+            res.render('../views/publicacion_completa', { publicacion, autores, categorias });
         } catch (err) {
             console.log(err);
             res.status(500).send('Error al obtener la publicaci�n');
@@ -95,7 +103,7 @@ class PublicacionController {
     }
 
     async obtenerPublicacionesPaginadas(req, res) {
-        // P�gina actual (Por defecto 1)
+        // Pagina actual (Por defecto 1)
         const page = req.query.page || 1;
          // Publicaciones por p�gina (Por Defecto 5)
         const perPage = parseInt(req.query.perPage) || 5;
@@ -111,13 +119,19 @@ class PublicacionController {
                 offset: offset,
             });
 
-            // Calcular el n�mero total de p�ginas
+            const categorias = await categoria.findAll();
+            const autores = await autor.findAll();
+            const comentarios = await comentario.findAll();
+
+            // Calcular el numero total de paginas
             const totalPublicaciones = await Publicacion.count();
             const totalPages = Math.ceil(totalPublicaciones / perPage);
-
             res.json({
                 publications: publicaciones,
                 totalPages: totalPages,
+                categorias: categorias,
+                autores: autores,
+                comentarios: comentarios
             });
         } catch (err) {
             console.error(err);
@@ -125,35 +139,31 @@ class PublicacionController {
         }
     }
 
+
     async obtenerPublicacionesPorCategoria(req, res) {
         try {
-            const nombreCategoria = req.params.nombreCategoria;
-
-            // Verificar si la categoría existe
-            const categoria = await Categoria.findOne({
-                where: { Nombre: nombreCategoria }
-            });
-
-            if (!categoria) {
-                return res.status(404).send('Categoría no encontrada');
-            }
-
-            // Obtener las publicaciones asociadas a la categoría
             const publicaciones = await Publicacion.findAll({
-                where: { categoriaId: categoria.id },
+                raw: true,
+                where: { categoriaId: req.params.id },
                 order: [['Fecha', 'DESC']]
             });
-
-            res.render('../views/publicaciones', { publicaciones, categoria });
+            res.render('../views/categoria', { publicaciones });
         } catch (err) {
             console.log(err);
-            res.status(500).send('Error al obtener las publicaciones por categoría');
         }
     }
 
     async mostrarCrearPublicacion(req, res) {
         try {
             res.render('../views/crearPublicacion');
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async mostrarEliminarPublicacion(req, res) {
+        try {
+            res.render('../views/eliminarPublicacion');
         } catch (err) {
             console.log(err);
         }
