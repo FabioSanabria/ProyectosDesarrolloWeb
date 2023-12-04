@@ -42,7 +42,7 @@ router.post('/', (req, res) => {
   // console.log('Input Data:', inputData);
   const fs = require('fs');
 
-  const text = fs.readFileSync('../../Outputs/choruses.txt', 'utf-8');
+  const text = fs.readFileSync('../../Models/choruses.txt', 'utf-8');
 
   const vocabSet = new Set(text);
   const vocab = Array.from(vocabSet).sort();

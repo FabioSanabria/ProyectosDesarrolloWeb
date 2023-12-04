@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node Generador/Backend/server.js"
+    "start": "node Generador/Backend/express.js"
   },
   "author": "",
   "license": "ISC",
