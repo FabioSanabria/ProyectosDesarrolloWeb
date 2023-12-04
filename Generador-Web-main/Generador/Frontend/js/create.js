@@ -53,6 +53,7 @@ function showNext() {
   // Muestra los elementos ocultos
   document.querySelector('.user-message').style.display = 'block';
   document.getElementById('result').style.display = 'block';
+  document.getElementById('loader').style.display = 'block';
 }
 
 function updateKeyword() {

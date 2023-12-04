@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #1d2731; /* Fondo más oscuro */
         }
 
         .container {
@@ -20,6 +20,10 @@
             border: 1px solid #ccc;
             border-radius: 8px;
             overflow: hidden;
+            border: 1px solid #34495e;
+            border-radius: 10px;
+            background-color: #2c3e50;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
         }
 
         .chat-header {
@@ -57,8 +61,8 @@
 
         .next {
             background-color: #28a745;
-            color: #fff;
             border-radius: 8px;
+            color: #fff;
             padding: 8px;
             margin-bottom: 10px;
             max-width: 70%;
@@ -75,6 +79,36 @@
             max-width: 70%;
             align-self: flex-end;
             display: none;
+        }
+
+        .container h2 {
+            color: #3498db;
+        }
+
+        .container h4 {
+            color: #ffffff;
+        }
+
+        .container p {
+            color: #ffffff;
+        }
+
+        .container .form-group label {
+            color: #ecf0f1;
+        }
+
+        .container .form-control {
+            border: 1px solid #3498db;
+            border-radius: 5px;
+            color: #ffffff;
+            background-color: #2c3e50;
+        }
+
+        .container .li {
+            border: 1px solid #3498db;
+            border-radius: 5px;
+            color: #3498db;
+            background-color: #2c3e50;
         }
     </style>
 
@@ -106,7 +140,7 @@
                         <div class="bot-message">Hola, ¡Por favor, ingresa una palabra clave!</div>
                         <div class="loader" id="loader">Generando canción...</div>
                         <div class="user-message" id="user-message">Palabra Clave: <strong id="keywordDisplay">...</strong></div>
-                        <div class="next" id="result" class="mt-4"></div>
+                        <div class="next" id="result"></div>
                     </div>
                 </div>
     
