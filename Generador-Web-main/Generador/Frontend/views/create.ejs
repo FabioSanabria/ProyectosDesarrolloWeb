@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Creador de Canciones</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+        }
+
+        .chat-box {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .chat-content {
+            padding: 20px;
+            height: 500px;
+            overflow-y: auto;
+        }
+
+        .user-message {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 8px;
+            padding: 8px;
+            margin-bottom: 10px;
+            max-width: 70%;
+            display: none;
+        }
+
+        .bot-message {
+            background-color: #28a745;
+            color: #fff;
+            border-radius: 8px;
+            padding: 8px;
+            margin-bottom: 10px;
+            max-width: 70%;
+            align-self: flex-end;
+        }
+
+        .next {
+            background-color: #28a745;
+            color: #fff;
+            border-radius: 8px;
+            padding: 8px;
+            margin-bottom: 10px;
+            max-width: 70%;
+            align-self: flex-end;
+            display: none;
+        }
+
+        .loader {
+            background-color: #28a745;
+            color: #fff;
+            border-radius: 8px;
+            padding: 8px;
+            margin-bottom: 10px;
+            max-width: 70%;
+            align-self: flex-end;
+            display: none;
+        }
+    </style>
+
+<script>
+    function showLoad() {
+        document.getElementById('result').style.display = 'none';
+        document.getElementById('user-message').style.display = 'none';
+        // Muestra los elementos ocultos
+        document.getElementById('loader').style.display = 'block';
+    }
+</script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Canciones anteriores:</h4>
+                <ul id="songList" class="list-group"></ul>
+            </div>
+            <div class="col-md-8">
+                <div class="chat-box">
+                    <div class="chat-header">
+                        <h4>Generador de Canciones</h4>
+                    </div>
+                    <div class="chat-content">
+                        <!-- Contenido del chat -->
+                        <div class="bot-message">Hola, ¡Por favor, ingresa una palabra clave!</div>
+                        <div class="loader" id="loader">Generando canción...</div>
+                        <div class="user-message" id="user-message">Palabra Clave: <strong id="keywordDisplay">...</strong></div>
+                        <div class="next" id="result" class="mt-4"></div>
+                    </div>
+                </div>
+    
+                <form class="mt-4" id="songForm">
+                    <div class="form-group">
+                        <label for="songText">Palabra Clave:</label>
+                        <input type="text" class="form-control" id="songText" required onkeypress="return isNaN(String.fromCharCode(event.keyCode));">
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="showLoad()">Generar</button>
+                </form>                
+    
+                <div class="mt-4">
+                    <h4>Ajustes</h4>
+                    <div class="form-group">
+                        <label for="temperatureSlider">Temperatura:</label>
+                        <input type="range" class="form-control-range" id="temperatureSlider" min="0.1" max="0.9" step="0.1" value="0.5">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/create.js"></script>
+</body>
+</html>
+

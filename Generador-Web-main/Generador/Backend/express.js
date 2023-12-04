@@ -10,7 +10,7 @@ const app = express();
 const creationRouter = require('./routes/creationRouter.js');
 
 // <-- Views Data -->
-app.set('views', path.join(__dirname, './views'));
+app.set('views', path.join(__dirname, '../Frontend/views'));
 app.set('view engine', 'ejs');
 
 // <-- App Parameters -->
