@@ -7,7 +7,7 @@ let model;
 async function loadGenerator() {
     try 
     {
-        model = await tf.loadLayersModel('file:///home/juanca/Documents/Gen-Web/ProyectosDesarrolloWeb/Generador-Web-main/Models/taylor_swift_js/model.json');
+        model = await tf.loadLayersModel('file:///home/user/Documents/.../Models/taylor_swift_js/model.json');
     } 
     catch (error)
     {

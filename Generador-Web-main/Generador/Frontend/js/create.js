@@ -1,41 +1,41 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const songForm = document.getElementById('songForm');
-  const songText = document.getElementById('songText');
-  const songList = document.getElementById('songList');
-  const resultDiv = document.getElementById('result');
-  const temperatureSlider = document.getElementById('temperatureSlider');
   const user = localStorage.getItem('user');
+  const form = document.getElementById('form ');
+  const list = document.getElementById('list');
+  const outputTag = document.getElementById('result');
+  const temperature = document.getElementById('temperature');
+  const textInput  = document.getElementById('textInput ');
   var newSongText;
 
   // Cargar canciones guardadas al iniciar
-  loadSavedSongs();
+  getSongs();
 
-  songForm.addEventListener('submit', function (event) {
+  form .addEventListener('submit', function (event) {
       event.preventDefault();
 
-      newSongText = songText.value.trim();
+      newSongText = textInput .value.trim();
 
       if (newSongText !== '') {
           // Generar y mostrar la canción
-          generateSong(newSongText, temperatureSlider.value);
-          saveSong(newSongText);
+          createSong(newSongText, temperature.value);
+          addSongs(newSongText);
 
-          songText.value = '';
+          textInput .value = '';
 
       }
   });
 
-  function loadSavedSongs() {
-      const storedSongs = JSON.parse(localStorage.getItem(user + 'Songs')) || [];
-      storedSongs.forEach(song => {
+  function getSongs() {
+      const songs = JSON.parse(localStorage.getItem(user + 'Songs')) || [];
+      songs.forEach(song => {
           const listItem = document.createElement('li');
           listItem.classList.add('list-group-item');
           listItem.textContent = song;
-          songList.appendChild(listItem);
+          list.appendChild(listItem);
       });
   }
 
-const generateSong = async (inputData, temperature) => {
+const createSong = async (inputData, temperature) => {
   await fetch('/create', {
     method: 'POST',
     mode: 'cors',
@@ -46,7 +46,7 @@ const generateSong = async (inputData, temperature) => {
     },
     body: JSON.stringify({ data: [inputData, temperature] }),
   }).then(response => response.json())
-  .then(data => displayGeneratedSong(data));
+  .then(data => showSongs(data));
 }
 
 function showNext() {
@@ -56,8 +56,8 @@ function showNext() {
   document.getElementById('loader').style.display = 'block';
 }
 
-function updateKeyword() {
-    var keyword = document.getElementById("songText").value;
+function updateInformation() {
+    var keyword = document.getElementById("textInput ").value;
 
     document.getElementById("keywordDisplay").innerText = keyword;
 
@@ -69,18 +69,18 @@ function updateKeyword() {
 }
 
 
-function displayGeneratedSong(song) {
+function showSongs(song) {
   console.log(song);
 
-  resultDiv.innerHTML = '';
+  outputTag.innerHTML = '';
 
   const paragraphs = song.split('\n');
 
   paragraphs.forEach((paragraph) => {
     const resultParagraph = document.createElement('p');
     resultParagraph.textContent = paragraph;
-    resultDiv.appendChild(resultParagraph);
-    updateKeyword();
+    outputTag.appendChild(resultParagraph);
+    updateInformation();
     showNext();
   });
 
@@ -88,18 +88,18 @@ function displayGeneratedSong(song) {
 }
 
 
-  function saveSong(song) {
+  function addSongs(song) {
       const listItem = document.createElement('li');
       listItem.classList.add('list-group-item');
       listItem.textContent = song;
-      songList.appendChild(listItem);
+      list.appendChild(listItem);
 
-      const storedSongs = JSON.parse(localStorage.getItem(user + 'Songs')) || [];
-      storedSongs.push(song);
-      localStorage.setItem(user + 'Songs', JSON.stringify(storedSongs));
+      const songs = JSON.parse(localStorage.getItem(user + 'Songs')) || [];
+      songs.push(song);
+      localStorage.setItem(user + 'Songs', JSON.stringify(songs));
   }
 
-  songList.addEventListener('click', function (event) {
+  list.addEventListener('click', function (event) {
     const clickedItem = event.target;
   
     if (clickedItem.tagName === 'LI') {
@@ -109,111 +109,12 @@ function displayGeneratedSong(song) {
   
       console.log(selectedSongContent);
   
-      resultDiv.innerHTML = '';
+      outputTag.innerHTML = '';
       const resultParagraph = document.createElement('p');
       resultParagraph.textContent = selectedSongContent;
-      resultDiv.appendChild(resultParagraph);
-      updateKeyword();
+      outputTag.appendChild(resultParagraph);
+      updateInformation();
       showNext();
     }
   });
 });
-
-
-/*
-document.addEventListener('DOMContentLoaded', function () {
-  const lyricsForm = document.getElementById('lyricsForm');
-  const lyricsInput = document.getElementById('lyricsInput');
-  const lyricsList = document.getElementById('lyricsList');
-  const resultContainer = document.getElementById('resultContainer');
-  const temperatureRange = document.getElementById('temperatureRange');
-  const currentUser = localStorage.getItem('currentUser');
-  var newLyricsInput;
-
-  // Cargar letras guardadas al iniciar
-  loadSavedLyrics();
-
-  lyricsForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    newLyricsInput = lyricsInput.value.trim();
-
-    if (newLyricsInput !== '') {
-      generateLyrics(newLyricsInput, temperatureRange.value);
-      saveLyrics(newLyricsInput);
-
-      lyricsInput.value = '';
-    }
-  });
-
-  function loadSavedLyrics() {
-    const storedLyrics = JSON.parse(localStorage.getItem(currentUser + 'Lyrics')) || [];
-    storedLyrics.forEach(lyric => {
-      const listItem = document.createElement('li');
-      listItem.classList.add('list-group-item');
-      listItem.textContent = lyric;
-      lyricsList.appendChild(listItem);
-    });
-  }
-
-  const generateLyrics = async (inputData, temperature) => {
-    await fetch('/create', {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ data: [inputData, temperature] }),
-    })
-      .then(response => response.json())
-      .then(data => displayGeneratedLyrics(data));
-  };
-
-  function displayGeneratedLyrics(lyrics) {
-    console.log(lyrics);
-
-    resultContainer.innerHTML = '';
-
-    const paragraphs = lyrics.split('\n');
-
-    paragraphs.forEach((paragraph) => {
-      const resultParagraph = document.createElement('p');
-      resultParagraph.textContent = paragraph;
-      resultContainer.appendChild(resultParagraph);
-    });
-
-    localStorage.setItem(currentUser + newLyricsInput, lyrics);
-  }
-
-  function saveLyrics(lyric) {
-    const listItem = document.createElement('li');
-    listItem.classList.add('list-group-item');
-    listItem.textContent = lyric;
-    lyricsList.appendChild(listItem);
-
-    const storedLyrics = JSON.parse(localStorage.getItem(currentUser + 'Lyrics')) || [];
-    storedLyrics.push(lyric);
-    localStorage.setItem(currentUser + 'Lyrics', JSON.stringify(storedLyrics));
-  }
-
-  lyricsList.addEventListener('click', function (event) {
-    const clickedItem = event.target;
-
-    if (clickedItem.tagName === 'LI') {
-      const selectedLyricTitle = clickedItem.textContent.trim();
-
-      const selectedLyricContent = localStorage.getItem(currentUser + selectedLyricTitle);
-
-      console.log(selectedLyricContent);
-
-      resultContainer.innerHTML = '';
-      const resultParagraph = document.createElement('p');
-      resultParagraph.textContent = selectedLyricContent;
-      resultContainer.appendChild(resultParagraph);
-    }
-  });
-});
-
-*/
