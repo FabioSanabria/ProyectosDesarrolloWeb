@@ -19,11 +19,11 @@ app.use(express.static(path.join(__dirname, './../Frontend')));
 
 console.log(__dirname);
 
-app.use('/generate', generateRouter);
+app.use('/create', generateRouter);
 
 // Login 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../Frontend/Login/Login.html'));
+  res.sendFile(path.join(__dirname, '../Frontend/Home/Home.html'));
 });
 
 app.listen(PORT, () => {

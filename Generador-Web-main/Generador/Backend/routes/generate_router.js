@@ -25,7 +25,7 @@ router.post('/:user_id', async (req, res, next) => {
 router.get('/', (req, res) => {
   // console.log(path.join(__dirname, '../../Frontend/Generate/Generate.html'));
   // res.sendFile(path.join(__dirname, '../../Frontend/Generate/Generate.html'));
-  res.render('Generate');
+  res.render('create');
 });
 
 router.post('/', (req, res) => {
@@ -42,7 +42,7 @@ router.post('/', (req, res) => {
   // console.log('Input Data:', inputData);
   const fs = require('fs');
 
-  const text = fs.readFileSync('../../Models/choruses.txt', 'utf-8');
+  const text = fs.readFileSync('Models/choruses.txt', 'utf-8');
 
   const vocabSet = new Set(text);
   const vocab = Array.from(vocabSet).sort();

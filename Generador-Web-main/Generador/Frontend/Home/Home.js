@@ -14,15 +14,10 @@ function login() {
     // console.log("Username is: " + username);
     // validate credentials
     const userExists = validateCredentials(username);
-    if (!userExists) {
-      // console.log("User exists");
-      saveToken(username);
-      // console.log("Token saved");
-    }
     // if success, then save the current user on LS
     localStorage.setItem("userinfo_id", username);
     // console.log("Saved current user");
-    window.location.href = '/generate'
+    window.location.href = '/create'
   } else {
     // 
   }
@@ -35,14 +30,3 @@ function validateCredentials(username) {
   }
   return false;
 }
-
-function saveToken(user) {
-  // console.log("Saving token");
-
-  const token = generateToken();
-
-  localStorage.setItem(user, token);
-}
-
-
-

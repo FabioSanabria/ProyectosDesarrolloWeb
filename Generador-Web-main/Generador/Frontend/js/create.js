@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
 const generateSong = async (inputData, temperature) => {
-  await fetch('/generate', {
+  await fetch('/create', {
     method: 'POST',
     mode: 'cors',
     cache: 'no-cache',
