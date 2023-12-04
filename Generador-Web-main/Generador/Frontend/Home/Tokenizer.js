@@ -1,9 +1,6 @@
 var rand = function() {
-  return Math.random().toString(36).substr(2); // remove `0.`
-};
+  return Math.random().toString(36).substr(2); };
 
-function generateToken() {
-  return rand() + rand(); // to make it longer
-}
+function generateToken() { return rand() + rand(); }
 
 export { generateToken };

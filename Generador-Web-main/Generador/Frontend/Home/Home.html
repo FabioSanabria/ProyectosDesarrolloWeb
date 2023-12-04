@@ -11,7 +11,7 @@
   <!-- Custom CSS -->
   <style>
     body {
-      background-color: #2c3e50;
+      background-color: #1d2731; /* Fondo más oscuro */
       color: #ecf0f1;
       font-family: 'Arial', sans-serif;
       display: flex;
@@ -35,6 +35,12 @@
       text-align: center;
       margin-bottom: 20px;
       color: #3498db;
+    }
+
+    .container p {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #bdc3c7;
     }
 
     .container .form-group {
@@ -101,13 +107,14 @@
 <body>
 
 <div class="container">
-  <h2>Swiftify Song Generator</h2>
-  <form>
+  <h2>Swiftify</h2>
+  <p>Generador de canciones aleatorias de Taylor Swift 💋</p>
+  <form id="loginForm">
     <div class="form-group">
       <label for="username">Usuario</label>
       <input type="text" class="form-control" id="username" placeholder="Ingresa tu usuario">
     </div>
-    <button type="submit" class="btn btn-login">Iniciar Sesión</button>
+    <button type="button" class="btn btn-login" id="loginButton">Iniciar Sesión</button>
   </form>
 </div>
 

@@ -1,35 +1,34 @@
 const path = require('path');
 const express = require('express');
 const tf = require('@tensorflow/tfjs-node');
-
 const router = express.Router();
-
 let model;
 
-async function loadModel() {
-    try {
-        model = await tf.loadLayersModel('file:///home/juanca/Documents/Gen-Web/ProyectosDesarrolloWeb/Generador-Web-main/Models/taylor_swift_js/model.json'); // Only Total Paths
-    } catch (error) {
-        console.error('Error loading model:', error);
+async function loadGenerator() {
+    try 
+    {
+        model = await tf.loadLayersModel('file:///home/juanca/Documents/Gen-Web/ProyectosDesarrolloWeb/Generador-Web-main/Models/taylor_swift_js/model.json');
+    } 
+    catch (error)
+    {
+        console.error('Error at loading generator model:', error);
     }
 }
 
-loadModel();
+loadGenerator();
+
+router.get('/', (req, res) => {
+  res.render('create');
+});
 
 router.post('/:user_id', async (req, res, next) => {
   await controller.start(req, res, next);
 });
 
-router.get('/', (req, res) => {
-  // console.log(path.join(__dirname, '../../Frontend/Generate/Generate.html'));
-  // res.sendFile(path.join(__dirname, '../../Frontend/Generate/Generate.html'));
-  res.render('create');
-});
-
+// Professor's Code (Translated from Python)
 router.post('/', (req, res) => {
-  // Check if the model is loaded
   if (!model) {
-      return res.status(500).send('Model not loaded yet');
+      return res.status(500).send('Model has not loaded yet');
   }
 
   const inputData = req.body.data;
@@ -37,7 +36,6 @@ router.post('/', (req, res) => {
       return res.status(400).send('Input data must be an array');
   }
   const tensor = tf.tensor(inputData);
-  // console.log('Input Data:', inputData);
   const fs = require('fs');
 
   const text = fs.readFileSync('Models/choruses.txt', 'utf-8');
@@ -51,36 +49,33 @@ router.post('/', (req, res) => {
   });
 
   const idx2char = vocab;
+  genFromPrompt(model, inputData[0], parseFloat(inputData[1]), char2idx, idx2char).then(result => res.json(result));
 
-  generateText(model, inputData[0], parseFloat(inputData[1]), char2idx, idx2char).then(result => res.json(result));
 });
 
-async function generateText(model, startString, t, char2idx, idx2char) {
+async function genFromPrompt(model, startString, temp, char2idx, idx2char) {
 
+  // Limit Number
   const numGenerate = 300;
-
-  let inputEval = startString.split('').map(s => char2idx[s]);
-  inputEval = tf.tensor2d([inputEval]);
-
-  const textGenerated = [];
-
-  const temperature = t;
+  let idxValue = startString.split('').map(s => char2idx[s]);
+  idxValue = tf.tensor2d([idxValue]);
+  const resultGen = [];
+  const temperature = temp;
 
   model.resetStates();
+  // Repeat for <numGenerate> characters.
   for (let i = 0; i < numGenerate; i++) {
-      const predictions = model.predict(inputEval);
-      
+      // Common code for predictions in tensorflow.
+      const predictions = model.predict(idxValue);
       const predictionsSqueezed = predictions.squeeze();
-  
       const predictionsScaled = predictionsSqueezed.div(temperature);
       const predictedId = tf.multinomial(predictionsScaled, 1).dataSync()[0];
-  
-      inputEval = tf.tensor2d([[predictedId]]);
-  
-      textGenerated.push(idx2char[predictedId]);
+      idxValue = tf.tensor2d([[predictedId]]);
+      resultGen.push(idx2char[predictedId]);
+      // <--->
     }
   
-    return startString + " " +textGenerated.join('');
+    return startString + " " +resultGen.join('') + ".";
 }
 
 module.exports = router;
