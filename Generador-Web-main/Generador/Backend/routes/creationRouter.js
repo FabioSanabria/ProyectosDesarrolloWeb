@@ -1,7 +1,5 @@
-//
-
-const express = require('express');
 const path = require('path');
+const express = require('express');
 const tf = require('@tensorflow/tfjs-node');
 
 const router = express.Router();
